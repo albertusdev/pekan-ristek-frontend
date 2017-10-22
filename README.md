@@ -1,16 +1,20 @@
-> **Use [react-starter-ssr](https://github.com/rkkautsar/react-starter-ssr) for server-side-rendering**
-
 ## Description
+Pekan Ristek Main Event Frontend Website
 
-An opinionated simple react boilerplate
+Pekan Ristek is an annual event held by RISTEK Fasilkom UI
 
+The event includes:
+=> Competition (UI/UX, Internal Problem Solving Competition, CTF, and CITD)
+=> Playground
+=> Seminar
+=> Ristek showcase
 
-## Usage
+More about RISTEK: ristek.cs.ui.ac.id
 
-Clone the boilerplate
-
+## Usage and Commands:
+Clone the repo
 ```sh
-git clone https://github.com/rkkautsar/react-starter
+git clone https://github.com/albertusangga/pekan-ristek-frontend
 ```
 
 Install dependencies
@@ -20,6 +24,13 @@ npm install
 npm start # run development server at :4000
 npm run build # build production to dist/
 ```
+Run at local:
+```
+NODE_ENV=local npm run dev
+```
+
+## Backend are at Ragil's Gitlab Repostiory:
+-> To allow UI SSO you have to setup nginx reverse proxy to run the frontend and backend at the same port
 
 
 ## Tech
@@ -40,3 +51,7 @@ npm run build # build production to dist/
 7. [Styled Components](https://github.com/styled-components/styled-components)
 8. [Superagent](https://github.com/visionmedia/superagent)
 9. Zero-configuration build ([poi](https://github.com/egoist/poi))
+
+## Copyright
+This repository and boilerplate are taken from rkkautsar/react-starter repository.
+Credits to Rakha Kanz.
