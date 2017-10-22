@@ -3,13 +3,12 @@ import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import routes from '../../routes';
 import theme from '../../common/theme';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Switch>
-        {routes.map(route => <Route key={route.path} {...route} />)}
-      </Switch>
+      {routes}
     </ThemeProvider>
   );
 }

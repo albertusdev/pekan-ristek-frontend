@@ -24,26 +24,32 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "bootstrap": "^3.3.7",
     "history": "^4.6.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
+    "react-bootstrap": "^0.31.3",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
+    "react-spinkit": "^3.0.0",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",
     "styled-components": "^2.0.0",
-    "superagent": "^3.5.2"
+    "superagent": "^3.7.0",
+    "superagent-defaults": "^0.1.14"
   },
   "scripts": {
     "test": "ava --verbose",
     "lint": "eslint src/**/*.js",
     "precommit": "npm run test",
-    "start": "poi dev src/index.js",
+    "start": "npm run build && npm run serve",
+    "serve": "node server.js",
+    "dev": "poi dev src/index.js",
     "build": "poi build src/index.js"
   },
   "precommit": [
