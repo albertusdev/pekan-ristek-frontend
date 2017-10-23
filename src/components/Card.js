@@ -9,7 +9,7 @@ const Card = styled(({ width, mobileWidth, height, mobileHeight, ...props }) => 
   }
   width: ${props => props.width || '50%'};
   height: ${props => props.height || '100%'};
-  border-radius: 2rem; 
+  border-radius: 0.5rem; 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   &:hover {

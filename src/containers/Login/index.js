@@ -189,16 +189,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 100vh;
-  max-width: 100%;
+  min-height: 100vh;
+  max-width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
 `;
 
 const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;

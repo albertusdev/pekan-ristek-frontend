@@ -1,13 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Glyphicon,
-  FormGroup,
-  InputGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock,
-} from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 import styled from 'styled-components';
 
 function InputIcon(props) {
@@ -17,13 +10,12 @@ function InputIcon(props) {
         {props.label}
       </Label>
       <InputGroup>
-        <InputGroup.Addon>
-          <Glyphicon glyph={props.glyph} />
-        </InputGroup.Addon>
         <FormControl
           {...props.name && { name: props.name }}
+          {...props}
           type={props.type}
           onChange={props.onChange}
+          placeholder={props.placeholder}
           value={props.value}
         />
       </InputGroup>
@@ -61,6 +53,7 @@ const Label = styled(ControlLabel)`
 InputIcon.defaultProps = {
   validationState: null,
   value: '',
+  placeholder: null,
   name: null,
   help: null,
 };
@@ -68,11 +61,11 @@ InputIcon.defaultProps = {
 InputIcon.propTypes = {
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  glyph: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
   validationState: PropTypes.string,
   value: PropTypes.string,
+  placeholder: PropTypes.string,
   help: PropTypes.string,
 };
 

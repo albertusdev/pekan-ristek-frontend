@@ -40,6 +40,11 @@ const theme = {
       standard: '10rem',
     },
   },
+  size: {
+    font: {
+      medium: '1.5rem',
+    },
+  },
 };
 
 export const media = bp => `@media screen and (max-width: ${theme.breakpoint[bp]})`;

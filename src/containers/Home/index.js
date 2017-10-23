@@ -29,7 +29,7 @@ export default Home;
 
 const Wrapper = styled.div`
   max-width: 100%;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden;
   display: flex;

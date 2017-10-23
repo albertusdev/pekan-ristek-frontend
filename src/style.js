@@ -5,6 +5,7 @@ import anuratiRegularURL from './assets/fonts/Anurati_Regular.otf';
 import highSchoolUSASerifURL from './assets/fonts/High_School_USA_Serif.ttf';
 import jaapokkienchanceRegularURL from './assets/fonts/Jaapokkienchance_Regular.otf';
 import verminVibes4HeliumURL from './assets/fonts/Vermin_Vibes_4_Helium.otf';
+
 /* eslint-disable no-unused-expressions */
 injectGlobal`
   html {

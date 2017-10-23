@@ -9,18 +9,21 @@ const Container = styled.div`
   align-items: center;
   margin-bottom: 1rem;
   span {
-    font-family: ${props => props.theme.font.helvetica};
+    font-family: ${props => props.theme.font.jaapokki};
     font-weight: bold;
-    transform-text: uppercase;
+    text-transform: uppercase;
   }
   .logo-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 1rem 0;
     .logo-Traveloka {
+      margin: 1rem 0;
       height: ${props => props.theme.height.logo.large};
     }
     .logo-Dewaweb {
+      margin: 1rem 0;
       height: ${props => props.theme.height.logo.medium};
     }
   }
