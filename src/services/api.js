@@ -27,4 +27,17 @@ export async function signup({
   });
 }
 
+export async function getUser({ id }) {
+  console.log('getting user ', id);
+  return request.get(apiURL.user(id));
+}
+
+export async function patchUser({ id, ...rest }) {
+  return request.patch(apiURL.user(id)).send({ ...rest });
+}
+
+export async function updatePassword({ id, old_password, password }) {
+  return request.post(apiURL.updatePassword(id)).send({ old_password, password });
+}
+
 export default request;

@@ -38,8 +38,8 @@ class Login extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.auth.login && nextProps.auth.login) {
+  componentDidMount() {
+    if (this.props.auth.login) {
       this.props.history.push(DASHBOARD_PATH);
     }
   }
@@ -48,6 +48,9 @@ class Login extends Component {
     const { username, password } = this.state;
     event.preventDefault();
     await this.props.login({ username, password });
+    if (this.props.auth.login) {
+      this.props.history.push(DASHBOARD_PATH);
+    }
   }
 
   onInputChange(event) {
@@ -60,21 +63,22 @@ class Login extends Component {
     let token;
     const interval = setInterval(() => {
       try {
-        if (ssoWindow.closed) {
-          clearInterval(interval);
-        }
         if (ssoWindow.location && ssoWindow.location.href) {
           token = ssoWindow.document.body.outerText;
-          ssoWindow.close();
-          clearInterval(interval);
-          this.props.setAuth(JSON.parse(token));
+          if (token) {
+            clearInterval(interval);
+            ssoWindow.close();
+            console.log(token);
+            this.props.setAuth(JSON.parse(token));
+            this.props.history.push(DASHBOARD_PATH);
+          }
         }
       } catch (e) {
         if (ssoWindow.closed) {
           clearInterval(interval);
         }
       }
-    }, 1000);
+    }, 500);
   }
 
   toggleUIStudent() {

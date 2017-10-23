@@ -7,6 +7,7 @@ import Signup from './containers/Signup';
 import NotFound from './components/NotFound';
 import AuthenticatedRoute from './common/auth';
 import {
+  DASHBOARD_PATH,
   LOGIN_PATH,
   LOGOUT_PATH,
   SIGNUP_PATH,
@@ -15,7 +16,7 @@ import {
 // https://github.com/ReactTraining/react-router/issues/3928
 
 const dashboardRoutes = [
-  { path: '/dashboard', component: Dashboard },
+  { path: DASHBOARD_PATH, component: Dashboard, exact: true },
 ];
 
 export default (

@@ -1,10 +1,11 @@
 import request, * as api from '../../services/api';
 
 const AUTH_CLEAR = 'app/auth/logout';
-const AUTH_SET = 'app/auth/AUTH_SET';
-const ERROR_SET = 'app/auth/ERROR_SET';
+const AUTH_SET = 'app/auth/auth_set';
+const ERROR_SET = 'app/auth/error_set';
 const LOADING = 'app/auth/loading';
-const LOADING_COMPLETE = 'app/auth/COMPLETE_LOADING';
+const LOADING_COMPLETE = 'app/auth/loading_complete';
+const PROFILE_UPDATE = 'app/auth/profile_update';
 
 const initialState = {
   dry: true,
@@ -28,6 +29,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: true, dry: false };
     case LOADING_COMPLETE:
       return { ...state, loading: false };
+    case PROFILE_UPDATE:
+      return { ...state, user: action.payload };
     default:
       return state;
   }
@@ -36,10 +39,14 @@ export default function reducer(state = initialState, action) {
 // Action Creator
 export function setAuth(payload) {
   return dispatch => {
-    const { token } = payload;
+    const { token, user } = payload;
     if (token) {
       request.set('Authorization', `JWT ${token}`);
-      window.localStorage.setItem('token', token);
+      window.localStorage.setItem('pekanRistekToken', token);
+    }
+    if (user) {
+      const { id } = user;
+      window.localStorage.setItem('pekanRistekId', id);
     }
     dispatch({ type: AUTH_SET, payload });
   };
@@ -65,7 +72,8 @@ export function completeLoading() {
 export function logout() {
   return dispatch => {
     request.set('Authorization', null);
-    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('pekanRistekToken');
+    window.localStorage.removeItem('pekanRistekId');
     dispatch(clearAuth());
   };
 }
@@ -74,13 +82,14 @@ export function reloadAuth() {
   return async dispatch => {
     try {
       dispatch(loading());
-      const { token } = window.localStorage;
+      const { pekanRistekToken, pekanRistekId } = window.localStorage;
       // if token or user id is null, relogin
-      if (token) {
-        dispatch(setAuth({ token }));
+      if (pekanRistekToken) {
+        dispatch(setAuth({ token: pekanRistekToken }));
+        const { body } = await api.getUser({ id: pekanRistekId });
+        dispatch(setAuth({ user: body }));
       } else {
         dispatch(logout());
-        window.localStorage.removeItem('token');
       }
       dispatch(completeLoading());
     } catch (e) {
@@ -117,6 +126,27 @@ export function signup({ email, first_name, institution, last_name, password, ph
         username,
       });
       dispatch(setAuth(body));
+      dispatch(completeLoading());
+    } catch (e) {
+      dispatch(setError(e.message));
+      dispatch(completeLoading());
+    }
+  };
+}
+
+export function updateProfile({ id, email, first_name, institution, last_name, phone }) {
+  return async dispatch => {
+    try {
+      dispatch(loading());
+      const { body } = await api.patchUser({
+        id,
+        email,
+        first_name,
+        last_name,
+        institution,
+        phone,
+      });
+      dispatch({ type: PROFILE_UPDATE, payload: body });
       dispatch(completeLoading());
     } catch (e) {
       dispatch(setError(e.message));
