@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
   span {
     font-family: ${props => props.theme.font.jaapokki};
     font-weight: bold;

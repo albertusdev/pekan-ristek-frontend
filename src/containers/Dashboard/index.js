@@ -15,6 +15,18 @@ import { DASHBOARD_EDIT_PROFILE_PATH } from '../../common/routing';
   }),
 )
 export default class Dashboard extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  };
+
+  componentDidMount() {
+    const user = this.props.auth.user;
+    if (user && !user.email && !user.phone) {
+      this.props.history.push(DASHBOARD_EDIT_PROFILE_PATH);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const user = nextProps.auth.user;
     if (user && !user.email && !user.phone) {

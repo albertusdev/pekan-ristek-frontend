@@ -7,6 +7,7 @@ import DashboardEditProfile from './containers/Dashboard/EditProfile';
 import DashboardEditPassword from './containers/Dashboard/EditPassword';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
+import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 import AuthenticatedRoute from './common/auth';
 import Navigation from './components/Navigation';
@@ -45,10 +46,11 @@ export default (
         render={props =>
           <AuthenticatedRoute>
             <Wrapper>
-              <Container>
+              <Body>
                 <Navigation history={props.history} />
                 <Comp {...props} />
-              </Container>
+              </Body>
+              <Footer />
             </Wrapper>
           </AuthenticatedRoute>}
       />
@@ -61,10 +63,11 @@ export default (
         render={props =>
           <AuthenticatedRoute authenticated={false}>
             <Wrapper>
-              <Container>
+              <Body>
                 <Navigation history={props.history}/>
                 <Comp {...props} />
-              </Container>
+              </Body>
+              <Footer />
             </Wrapper>
           </AuthenticatedRoute>}
       />
@@ -76,17 +79,16 @@ export default (
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 98vw;
+  min-height: 100vh;
 `;
 
-const Container = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Body = styled.div`
+  width: 80%;
   align-self: center;
+  align-items: center;
   justify-content: center;
   ${media('mobile')} {
     width: 100%;

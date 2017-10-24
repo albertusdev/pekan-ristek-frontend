@@ -9,7 +9,6 @@ import verminVibes4HeliumURL from './assets/fonts/Vermin_Vibes_4_Helium.otf';
 /* eslint-disable no-unused-expressions */
 injectGlobal`
   html {
-    position: absolute;
     font-size: 16px;
     background: ${theme.white};
     color: ${theme.black};
@@ -19,7 +18,6 @@ injectGlobal`
     position: relative;
     top: 0;
     left: 0;
-    width: 100vw;
   }
 
   @font-face {
