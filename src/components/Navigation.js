@@ -1,12 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LOGIN_PATH } from '../common/routing';
+import { connect } from 'react-redux';
+import { DASHBOARD_PATH, LOGIN_PATH, LOGOUT_PATH } from '../common/routing';
+
+@connect(state => ({ auth: state.auth }))
+export default class Navigation extends React.Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
+  render() {
+    const { login } = this.props.auth;
+    return (
+      <Container>
+        <div className="logo" />
+        <div className="navigation">
+          <button onClick={() => this.props.history.push('/')}>Home</button>
+          <button onClick={() => this.props.history.push(DASHBOARD_PATH)}>Dashboard</button>
+          {!login &&
+            <button onClick={() => this.props.history.push(LOGIN_PATH)}>Login / Signup</button>}
+          {login && <button onClick={() => this.props.history.push(LOGOUT_PATH)}>Logout</button>}
+        </div>
+      </Container>
+    );
+  }
+}
 
 const Container = styled.div`
   width: 100%;
   position: sticky;
-  top: 1rem;
-  padding: 1.5rem 0;
+  top: 0;
+  padding: 2.5rem 0 1.5rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,7 +42,8 @@ const Container = styled.div`
   font-family: ${props => props.theme.font.helvetica};
   font-weight: bold;
   border-bottom: 1px solid ${props => props.theme.color.black};
-
+  z-index: 1;
+  background-color: ${props => props.theme.color.white};
   .logo {
     width: 3rem;
     height: 1rem;
@@ -39,15 +68,3 @@ const Container = styled.div`
     }
   }
 `;
-
-const Navigation = props =>
-  <Container>
-    <div className="logo" />
-    <div className="navigation">
-      <button>Competition</button>
-      <button>Playground</button>
-      <button onClick={() => this.props.history.push(LOGIN_PATH)}>Login / Signup</button>
-    </div>
-  </Container>;
-
-export default Navigation;

@@ -95,6 +95,7 @@ export function reloadAuth() {
       dispatch(completeLoading());
     } catch (e) {
       dispatch(setError(e.message));
+      dispatch(logout());
       dispatch(completeLoading());
     }
   };

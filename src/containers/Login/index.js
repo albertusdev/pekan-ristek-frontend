@@ -85,52 +85,47 @@ class Login extends Component {
   render() {
     const { username, password, isUIStudent } = this.state;
     return (
-      <Wrapper>
-        <Container>
-          <Body>
-            <Card width="80vw" mobileWidth="100vw">
-              <div className="left">
-                <img src={squares} className="squares" alt="square logo" />
-                <PekanRistek>Pekan Ristek</PekanRistek>
-              </div>
-              <div className="right">
-                <PageTitle>Sign in</PageTitle>
-                <CenterForm isActive={!isUIStudent}>
-                  <InputIcon
-                    type="tel"
-                    name="username"
-                    glyph="user"
-                    placeHolder="username"
-                    value={username}
-                    onChange={e => this.onInputChange(e)}
-                    validationState={this.props.auth.error ? 'error' : null}
-                  />
-                  <InputIcon
-                    type="password"
-                    name="password"
-                    glyph="lock"
-                    value={password}
-                    placeHolder="password"
-                    onChange={e => this.onInputChange(e)}
-                    validationState={this.props.auth.error ? 'error' : null}
-                    help={this.props.auth.error ? 'Username atau password salah' : null}
-                  />
-                  <Button disabled={this.props.auth.loading} onClick={e => this.login(e)}>
-                    {!this.props.auth.loading && 'Sign in'}
-                    {this.props.auth.loading && <LoadingButtonComponent>Loading</LoadingButtonComponent>}
-                  </Button>
-                </CenterForm>
-                <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
-                <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
-                  {isUIStudent && <span>Not an UI student? Sign in manually.</span>}
-                  {!isUIStudent && <span>Doesn't have account yet? Sign up.</span>}
-                </EnforceSSOToggler>
-              </div>
-            </Card>
-          </Body>
-          <Footer />
-        </Container>
-      </Wrapper>
+      <Body>
+        <Card width="80%" mobileWidth="100%">
+          <div className="left">
+            <img src={squares} className="squares" alt="square logo" />
+            <PekanRistek>Pekan Ristek</PekanRistek>
+          </div>
+          <div className="right">
+            <PageTitle>Sign in</PageTitle>
+            <CenterForm isActive={!isUIStudent}>
+              <InputIcon
+                type="tel"
+                name="username"
+                glyph="user"
+                placeHolder="username"
+                value={username}
+                onChange={e => this.onInputChange(e)}
+                validationState={this.props.auth.error ? 'error' : null}
+              />
+              <InputIcon
+                type="password"
+                name="password"
+                glyph="lock"
+                value={password}
+                placeHolder="password"
+                onChange={e => this.onInputChange(e)}
+                validationState={this.props.auth.error ? 'error' : null}
+                help={this.props.auth.error ? 'Username atau password salah' : null}
+              />
+              <Button disabled={this.props.auth.loading} onClick={e => this.login(e)}>
+                {!this.props.auth.loading && 'Sign in'}
+                {this.props.auth.loading && <LoadingButtonComponent>Loading</LoadingButtonComponent>}
+              </Button>
+            </CenterForm>
+            <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
+            <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
+              {isUIStudent && <span>Not an UI student? Sign in manually.</span>}
+              {!isUIStudent && <span>Doesn't have account yet? Sign up.</span>}
+            </EnforceSSOToggler>
+          </div>
+        </Card>
+      </Body>
     );
   }
 }
@@ -155,54 +150,11 @@ const Button = styled.button`
   }
 `;
 
-const CenterForm = styled(({ isActive, ...props }) => <Form {...props} />)`
-  display: flex;
-  display: ${props => !props.isActive && 'none'};
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  transition: 1s;
-  .form-group {
-    margin: 0;
-  }
-`;
-
-const EnforceSSOToggler = styled.button`
-  text-decoration: underline;
-  border: none;
-  background-color: ${props => props.theme.color.white};
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Wrapper = styled.div`
-  align-items: center;
-  background-image: ${props => props.theme.linearGradient.sunnyMorning};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  max-width: 100vw;
-  overflow-x: hidden;
-  overflow-y: hidden;
-`;
-
-const Container = styled.div`
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const Body = styled.div`
   display: flex;
   align-self: center;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
   color: ${props => props.theme.color.black};
   ${Card} {
     display: flex;
@@ -227,6 +179,27 @@ const Body = styled.div`
         width: 100%;
       }
     }
+  }
+`;
+const CenterForm = styled(({ isActive, ...props }) => <Form {...props} />)`
+  display: flex;
+  display: ${props => !props.isActive && 'none'};
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  transition: 1s;
+  .form-group {
+    margin: 0;
+  }
+`;
+
+const EnforceSSOToggler = styled.button`
+  text-decoration: underline;
+  border: none;
+  background-color: ${props => props.theme.color.white};
+  &:focus {
+    outline: none;
   }
 `;
 

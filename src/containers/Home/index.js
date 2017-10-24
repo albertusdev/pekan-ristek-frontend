@@ -8,33 +8,19 @@ import { LOGIN_PATH } from '../../common/routing';
 class Home extends Component {
   render() {
     return (
-      <Wrapper>
-        <Navigation />
-          <Body>
-            <Title>
-              <img src={squares} className="squares" alt="square logo" />
-              <span>Pekan Ristek 2017</span>
-            </Title>
-            <Subtitle>IT Strikes Back</Subtitle>
-            <Button onClick={() => this.props.history.push(LOGIN_PATH)}>Login</Button>
-          </Body>
-          <Footer />
-      </Wrapper>
+      <Body>
+        <Title>
+          <img src={squares} className="squares" alt="square logo" />
+          <span>Pekan Ristek 2017</span>
+        </Title>
+        <Subtitle>IT Strikes Back</Subtitle>
+        <Button onClick={() => this.props.history.push(LOGIN_PATH)}>Login</Button>
+      </Body>
     );
   }
 }
 
 export default Home;
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 0 8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background: ${props => props.theme.color.white};
-`;
 
 const Body = styled.div`
   display: flex;

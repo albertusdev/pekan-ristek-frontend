@@ -16,11 +16,10 @@ injectGlobal`
   }
 
   #app {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
-    min-width: 100vw;
-    min-height: 100vh;
+    width: 100vw;
   }
 
   @font-face {

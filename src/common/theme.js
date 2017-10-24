@@ -43,6 +43,8 @@ const theme = {
   size: {
     font: {
       medium: '1.5rem',
+      large: '2rem',
+      jumbo: '3rem',
     },
   },
 };

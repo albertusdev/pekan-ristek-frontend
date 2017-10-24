@@ -118,25 +118,29 @@ export default class Competitions extends Component {
       <Container>
         {!hasFocus &&
           Object.keys(competition).map(key =>
-            <Card key={competition[key].title}>
-              <img src={competition[key].logo} alt={`logo ${competition[key].title}`} />
-              <span className="title">
-                {competition[key].title}
-              </span>
-              <button
-                onClick={() =>
-                  this.setAsActive({ code: competition[key].code, title: competition[key].title })}
-              >
-                Join now
-              </button>
-              <a href={competition[key].rulebookURL} target="_blank">
-                Download Rulebook
-              </a>
+            <Card key={competition[key].title} width="25%">
+              <div className="top">
+                <img src={competition[key].logo} alt={`logo ${competition[key].title}`} />
+                <span className="title">
+                  {competition[key].title}
+                </span>
+              </div>
+              <div className="bottom">
+                <Button
+                  onClick={() =>
+                    this.setAsActive({ code: competition[key].code, title: competition[key].title })}
+                >
+                  Join now
+                </Button>
+                <a href={competition[key].rulebookURL} target="_blank">
+                  Download Rulebook
+                </a>
+              </div>
             </Card>
           )}
         {hasFocus &&
           hasRegistered &&
-          <Card>
+          <Card width="100%">
             <span className="title">
               {this.state.active.title}
             </span>
@@ -159,7 +163,7 @@ export default class Competitions extends Component {
           </Card>}
         {hasFocus &&
           !hasRegistered &&
-          <Card>
+          <Card width="100%">
             <span className="title">
               {this.state.active.title}
             </span>
@@ -210,26 +214,43 @@ export default class Competitions extends Component {
 const Container = styled(({ column, ...props }) => <div {...props} />)`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 1rem;
   ${props => props.column && 'flex-direction: column;'}
   ${media('mobile')} {
     flex-direction: column;
   }
   ${Card} {
-    border-radius: 0.5rem;
-    flex-grow: 1;
-    width: 40%;
-    margin: 1rem 1rem;
-    justify-content: center;
     align-items: center;
-    text-align: center;
     align-self: center;
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    height: 20rem;
+    justify-content: space-between;
+    text-align: center;
     .title {
       text-transform: uppercase;
       font-family: ${props => props.theme.font.jaapokki};
       align-self: center;
       font-size: ${props => props.theme.size.font.medium};
+    }
+    .top {
+      display: flex;
+      flex-direction: column;
+      img {
+        height: 5rem;
+        align-self: center;
+        object-fit: scale-down;
+        margin: 2rem 0 1rem 0;
+      }
+      .title {
+        align-self: stretch;
+      }
+    }
+    .bottom {
+      display: flex;
+      flex-direction: column;
     }
     ${media('mobile')} {
       width: 80%;
