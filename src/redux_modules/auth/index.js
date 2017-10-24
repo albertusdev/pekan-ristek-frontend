@@ -70,11 +70,12 @@ export function completeLoading() {
 
 // Thunk
 export function logout() {
-  return dispatch => {
+  return async dispatch => {
     request.set('Authorization', null);
     window.localStorage.removeItem('pekanRistekToken');
     window.localStorage.removeItem('pekanRistekId');
     dispatch(clearAuth());
+    await api.ssoLogout();
   };
 }
 
@@ -87,7 +88,7 @@ export function reloadAuth() {
       if (pekanRistekToken) {
         dispatch(setAuth({ token: pekanRistekToken }));
         const { body } = await api.getUser({ id: pekanRistekId });
-        dispatch(setAuth({ user: body }));
+        dispatch(setAuth({ token: pekanRistekToken, user: body }));
       } else {
         dispatch(logout());
       }

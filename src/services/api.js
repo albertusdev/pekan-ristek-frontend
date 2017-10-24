@@ -7,6 +7,10 @@ export async function login({ username, password }) {
   return request.post(apiURL.login).send({ username, password });
 }
 
+export async function logout() {
+  return request.get(apiURL.ssoLOGOUT);
+}
+
 export async function signup({
   email,
   first_name,
@@ -37,6 +41,18 @@ export async function patchUser({ id, ...rest }) {
 
 export async function updatePassword({ id, old_password, password }) {
   return request.post(apiURL.updatePassword(id)).send({ old_password, password });
+}
+
+export async function joinTeam({ token }) {
+  return request.post(apiURL.joinTeam).send({ team_token: token });
+}
+
+export async function createTeam({ name, competition }) {
+  return request.post(apiURL.createTeam).send({ name, competition });
+}
+
+export async function getTeam({ competition }) {
+  return request.get(apiURL.team(competition));
 }
 
 export default request;

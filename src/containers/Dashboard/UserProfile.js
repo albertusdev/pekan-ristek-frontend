@@ -186,20 +186,22 @@ export default class UserProfile extends Component {
     }
     return (
       <Profile>
-        <h2>Welcome,</h2>
-        <div className="name">
-          {`${user && user.id} - ${user && user.first_name} ${user && user.last_name}`}
+        <div className="container">
+          <h2>Welcome,</h2>
+          <div className="name">
+            {`${user && user.id} - ${user && user.first_name} ${user && user.last_name}`}
+          </div>
+          <div className="institution">
+            {user && user.institution}
+          </div>
+          <div className="email">
+            {user && user.email}
+          </div>
+          <ButtonsContainer>
+            <Button onClick={() => this.toggleEditProfile()}>Edit Profile</Button>
+            <Button onClick={() => this.toggleEditPassword()}>Edit Password</Button>
+          </ButtonsContainer>
         </div>
-        <div className="institution">
-          {user && user.institution}
-        </div>
-        <div className="email">
-          {user && user.email}
-        </div>
-        <ButtonsContainer>
-          <Button onClick={() => this.toggleEditProfile()}>Edit Profile</Button>
-          <Button onClick={() => this.toggleEditPassword()}>Edit Password</Button>
-        </ButtonsContainer>
       </Profile>
     );
   }
@@ -213,6 +215,9 @@ const Profile = styled.div`
   align-items: flex-start;
   justify-content: center;
   font-family: ${props => props.theme.font.helvetica};
+  .container {
+    margin: 1rem 0 1rem 2rem;
+  }
   .name {
     text-transform: uppercase;
     font-weight: bold;

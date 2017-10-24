@@ -29,6 +29,14 @@ class Login extends Component {
     login: PropTypes.func.isRequired,
   }
 
+  static openLoginSSO() {
+    const ssoWindow = window.open(ssoLOGIN, 'SSO UI', 'width=600, height=600');
+    const interval = setInterval(() => {
+      if (!ssoWindow.closed) ssoWindow.postMessage('open window please', '*');
+      else clearInterval(interval);
+    }, 100);
+  }
+
   constructor() {
     super();
     this.state = {
@@ -42,6 +50,15 @@ class Login extends Component {
     if (this.props.auth.login) {
       this.props.history.push(DASHBOARD_PATH);
     }
+    const receiveSSOLoginCredentials = e => {
+      const allowedOrigin = 'http://ristek.cs.ui.ac.id';
+      const allowedLocalOrigin = 'http://localhost:8000';
+      if (e.origin === allowedOrigin || e.origin === allowedLocalOrigin) {
+        this.props.setAuth(e.data);
+        this.props.history.push(DASHBOARD_PATH);
+      }
+    };
+    window.addEventListener('message', receiveSSOLoginCredentials, false);
   }
 
   async login(event) {
@@ -56,29 +73,6 @@ class Login extends Component {
   onInputChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-  }
-
-  openLoginSSO() {
-    const ssoWindow = window.open(ssoLOGIN, 'SSO UI', 'width=600, height=300');
-    let token;
-    const interval = setInterval(() => {
-      try {
-        if (ssoWindow.location && ssoWindow.location.href) {
-          token = ssoWindow.document.body.outerText;
-          if (token) {
-            clearInterval(interval);
-            ssoWindow.close();
-            console.log(token);
-            this.props.setAuth(JSON.parse(token));
-            this.props.history.push(DASHBOARD_PATH);
-          }
-        }
-      } catch (e) {
-        if (ssoWindow.closed) {
-          clearInterval(interval);
-        }
-      }
-    }, 500);
   }
 
   toggleUIStudent() {
@@ -126,7 +120,7 @@ class Login extends Component {
                     {this.props.auth.loading && <LoadingButtonComponent>Loading</LoadingButtonComponent>}
                   </Button>
                 </CenterForm>
-                <ButtonSSO onClick={() => this.openLoginSSO()} isActive={isUIStudent} />
+                <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
                 <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
                   {isUIStudent && <span>Not an UI student? Sign in manually.</span>}
                   {!isUIStudent && <span>Doesn't have account yet? Sign up.</span>}
