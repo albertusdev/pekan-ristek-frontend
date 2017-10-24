@@ -7,7 +7,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
   span {
     font-family: ${props => props.theme.font.helvetica};
     font-weight: bold;

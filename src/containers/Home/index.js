@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import squares from '../../assets/squares.png';
 import Footer from '../../components/Footer';
+import Navigation from '../../components/Navigation';
 import { LOGIN_PATH } from '../../common/routing';
 
 class Home extends Component {
   render() {
     return (
       <Wrapper>
-        <Overlay />
-        <Container>
+        <Navigation />
           <Body>
             <Title>
               <img src={squares} className="squares" alt="square logo" />
@@ -19,7 +19,6 @@ class Home extends Component {
             <Button onClick={() => this.props.history.push(LOGIN_PATH)}>Login</Button>
           </Body>
           <Footer />
-        </Container>
       </Wrapper>
     );
   }
@@ -28,54 +27,21 @@ class Home extends Component {
 export default Home;
 
 const Wrapper = styled.div`
-  max-width: 100%;
-  max-height: 100vh;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  width: 100%;
+  padding: 0 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%);
-`;
-
-const Overlay = styled.div`
-  @keyframes fadeOpacity {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  width: 100%;
-  height: 100vh;
-  background-image: ${props => props.theme.linearGradient.sunnyMorning};
-  position: absolute;
-  z-index: 0;
-  animation: fadeOpacity 10s infinite;
-`;
-
-const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
+  background: ${props => props.theme.color.white};
 `;
 
 const Body = styled.div`
   display: flex;
+  margin: 2rem 0 0 0;
   flex-direction: column;
-  align-self: center;
-  justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  justify-content: center;
   .logoContainer {
     width: 30rem;
     display: flex;

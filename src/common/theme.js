@@ -8,7 +8,7 @@ const theme = {
     black: '#1E2019',
     blackTransparent: opacity => `rgba(0, 0, 0, ${opacity}`,
     gray: '#585B56',
-    white: '#FFF',
+    white: '#FFFFFF',
     orange: '#FFD782',
     yellowPR: '#F4D35E', // yellow Pekan Ristek
     yellowUI: '#FED304', // yellow Universitas Indonesia
