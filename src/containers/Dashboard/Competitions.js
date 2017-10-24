@@ -8,6 +8,7 @@ import { media } from '../../common/theme';
 import Card from '../../components/Card';
 import InputIcon from '../../components/InputIcon';
 import LoadingButtonComponent from '../../components/LoadingButtonComponent';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 // Assets
 import logoCITD from '../../assets/logo-citd.png';
@@ -141,7 +142,6 @@ export default class Competitions extends Component {
             </Card>
           )}
         {hasFocus &&
-          hasRegistered &&
           <Card className="solo" width="100%">
             <BackButton onClick={() => this.clearActive()}>
               <Glyphicon glyph="arrow-left" />
@@ -150,73 +150,71 @@ export default class Competitions extends Component {
             <span className="title">
               {this.state.active.title}
             </span>
-            <div className="alert-message">You have joined this competition</div>
-            <div className="team-name">
-              {this.props.competition.name}
-            </div>
-            <div className="team-token">
-              Your token is: {this.props.competition.token}
-            </div>
-            <div className="team-members">
-              Team members:
-              {this.props.competition.members &&
-                this.props.competition.members.map(member =>
-                <div className="team-member">
-                  {`${member.first_name} ${member.last_name}`}
+            {loading && <LoadingIndicator />}
+            {hasRegistered &&
+              !loading &&
+              <div>
+                <div className="alert-message">You have joined this competition</div>
+                <div className="team-name">
+                  {this.props.competition.name}
                 </div>
-              )}
-            </div>
-          </Card>}
-        {hasFocus &&
-          !hasRegistered &&
-          <Card className="solo" width="100%">
-            <BackButton onClick={() => this.clearActive()}>
-              <Glyphicon glyph="arrow-left" />
-              <span>Back</span>
-            </BackButton>
-            <span className="title">
-              {this.state.active.title}
-            </span>
-            <Form>
-              <StyledFormGroup>
-                <FormTitle>Create a team</FormTitle>
-                <Flex>
-                  <FormControl
-                    name="name"
-                    onChange={e => this.handleInputChange(e)}
-                    placeholder="enter team name here"
-                    value={this.state.name}
-                  />
-                  <Button
-                    disabled={this.props.competition.loading}
-                    onClick={e => this.submitCreateTeam(e)}
-                  >
-                    {this.state.isCreateTeamButtonClicked && <LoadingButtonComponent />}
-                    {!this.state.isCreateTeamButtonClicked && 'Submit'}
-                  </Button>
-                </Flex>
-              </StyledFormGroup>
-            </Form>
-            <Form>
-              <StyledFormGroup>
-                <FormTitle>Join a team</FormTitle>
-                <Flex>
-                  <FormControl
-                    name="token"
-                    onChange={e => this.handleInputChange(e)}
-                    placeholder="enter token team here"
-                    value={this.state.token}
-                  />
-                  <Button
-                    disabled={this.props.competition.loading}
-                    onClick={e => this.submitJoinTeam(e)}
-                  >
-                    {this.state.isJoinTeamButtonClicked && <LoadingButtonComponent />}
-                    {!this.state.isJoinTeamButtonClicked && 'Submit'}
-                  </Button>
-                </Flex>
-              </StyledFormGroup>
-            </Form>
+                <div className="team-token">
+                  Your token is: {this.props.competition.token}
+                </div>
+                <div className="team-members">
+                  Team members:
+                  {this.props.competition.members &&
+                    this.props.competition.members.map(member =>
+                    <div className="team-member">
+                      {`${member.first_name} ${member.last_name}`}
+                    </div>
+                  )}
+                </div>
+              </div>}
+            {!hasRegistered &&
+              !loading &&
+              <div>
+                <Form>
+                  <StyledFormGroup>
+                    <FormTitle>Create a team</FormTitle>
+                    <Flex>
+                      <FormControl
+                        name="name"
+                        onChange={e => this.handleInputChange(e)}
+                        placeholder="enter team name here"
+                        value={this.state.name}
+                      />
+                      <Button
+                        disabled={this.props.competition.loading}
+                        onClick={e => this.submitCreateTeam(e)}
+                      >
+                        {this.state.isCreateTeamButtonClicked && <LoadingButtonComponent />}
+                        {!this.state.isCreateTeamButtonClicked && 'Submit'}
+                      </Button>
+                    </Flex>
+                  </StyledFormGroup>
+                </Form>
+                <Form>
+                  <StyledFormGroup>
+                    <FormTitle>Join a team</FormTitle>
+                    <Flex>
+                      <FormControl
+                        name="token"
+                        onChange={e => this.handleInputChange(e)}
+                        placeholder="enter token team here"
+                        value={this.state.token}
+                      />
+                      <Button
+                        disabled={this.props.competition.loading}
+                        onClick={e => this.submitJoinTeam(e)}
+                      >
+                        {this.state.isJoinTeamButtonClicked && <LoadingButtonComponent />}
+                        {!this.state.isJoinTeamButtonClicked && 'Submit'}
+                      </Button>
+                    </Flex>
+                  </StyledFormGroup>
+                </Form>
+              </div>}
           </Card>}
       </Container>
     );
@@ -243,6 +241,7 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
   display: flex;
   flex-wrap: wrap;
   margin-top: 1rem;
+  position: relative;
   ${props => props.column && 'flex-direction: column;'}
   ${media('mobile')} {
     flex-direction: column;
@@ -257,6 +256,7 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
     height: 20rem;
     justify-content: space-between;
     text-align: center;
+    position: relative;
     .title {
       text-transform: uppercase;
       font-family: ${props => props.theme.font.jaapokki};

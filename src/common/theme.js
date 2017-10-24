@@ -6,7 +6,7 @@ const theme = {
   },
   color: {
     black: '#1E2019',
-    blackTransparent: opacity => `rgba(0, 0, 0, ${opacity}`,
+    blackTransparent: opacity => `rgba(0, 0, 0, ${opacity})`,
     gray: '#585B56',
     white: '#FFFFFF',
     orange: '#FFD782',

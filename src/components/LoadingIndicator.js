@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 
 const Container = styled.div`
   position: absolute;
-  z-index: 3;
+  z-index: 99;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: ${props => props.theme.color.blackTransparent(0.5)};
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   animation: fadein 1s;
-
+  background: ${props => props.theme.color.blackTransparent(0.25)};
   @keyframes fadein {
     from {
       opacity: 0;
