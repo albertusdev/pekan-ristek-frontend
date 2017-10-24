@@ -91,7 +91,7 @@ const Body = styled.div`
     .text {
       width: 35%;
       font-size: 1rem;
-      padding: 0 2rem 0 2rem;
+      padding: 0 3.5rem 0 2rem;
       margin: 4rem 4.5rem 0 0;
       font-family: ${props => props.theme.font.jaapokki};
     }
