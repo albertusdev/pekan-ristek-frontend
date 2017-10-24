@@ -1,6 +1,6 @@
 const config = {
   production: {
-    API_URL: 'http://ristek.cs.ui.ac.id/pekan-ristek',
+    API_URL: 'http://ristek.cs.ui.ac.id/pr-api',
   },
   development: {
     API_URL: 'http://example.dev',

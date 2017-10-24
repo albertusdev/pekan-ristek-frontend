@@ -39,6 +39,10 @@ export default class UserProfile extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setPropsToState(this.props);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.props.auth.user && nextProps.auth.user) {
       this.setPropsToState(nextProps);
@@ -84,7 +88,7 @@ export default class UserProfile extends Component {
       // eslint-disable-next-line
       if (is_internal) delete update['institution'];
       await this.props.updateProfile(update);
-      this.toggleEditProfile();
+      this.props.history.push(DASHBOARD_PATH);
     }
   }
 
