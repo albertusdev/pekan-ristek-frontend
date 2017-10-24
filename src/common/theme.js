@@ -21,7 +21,7 @@ const theme = {
     pekanRistek: 'Vermin_Vibes_4_Helium',
   },
   linearGradient: {
-    sunnyMorning: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
+    turnWhite: 'linear-gradient(120deg, #fff 0%, #585b56 100%)',
   },
   height: {
     button: {
