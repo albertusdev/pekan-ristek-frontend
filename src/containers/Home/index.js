@@ -5,53 +5,42 @@ import squaresParticle from '../../assets/squares-particel.svg';
 import Footer from '../../components/Footer';
 import Navigation from '../../components/Navigation';
 import {LOGIN_PATH} from '../../common/routing';
-import showcaseLogo from '../../assets/logo-showcase.png';
+import showcaseLogo from '../../assets/logo-showcase.svg';
 
 class Home extends Component {
   render() {
     return (
-      <Wrapper>
-        <Navigation />
-          <Body>
-            <div className="header-image">
-              <div className="background-logo">
-                <img src={squaresParticle} alt="" />
-              </div>
-            </div>
-            <div className="header-text">
-              <span>Pekan Ristek 2017</span>
-              <div className="text">
-                merupakan ajang tahunan yang diselenggarakan oleh Ristek Fasilkom UI, bertujuan untuk meningkatkan minat dan ketertarikan terhadap dunia IT. Tahun ini, Pekan Ristek membawakan tema "IT Strikes Back"
-              </div>
-            </div>
-           <div className="showcase-section">
-           <div className="showcase-header-logo">
-            {/* @TODO change to svg and fix the dimension */}
-              <img src={squares} />
-            </div>
-            <div className="showcase-title">
-              <span>Showcase</span>
-            </div>
-            <div className="showcase-text">
-            </div>
-           </div>
-          </Body>
-      </Wrapper>
+      <Body>
+        <div className="header-image">
+          <div className="background-logo">
+            <img src={squaresParticle} alt="" />
+          </div>
+        </div>
+        <div className="header-text">
+          <span>Pekan Ristek 2017</span>
+          <div className="text">
+            merupakan ajang tahunan yang diselenggarakan oleh Ristek Fasilkom UI, bertujuan untuk meningkatkan minat dan ketertarikan terhadap dunia IT. Tahun ini, Pekan Ristek membawakan tema "IT Strikes Back"
+          </div>
+        </div>
+       <div className="showcase-section">
+        <div className="showcase-title">
+            <span>Showcase</span>
+          </div>
+        <div className="showcase-header-logo">
+        {/* @TODO change to svg and fix the dimension */}
+          <img src={showcaseLogo} />
+        </div>
+        <div className="showcase-text">
+          Ajang bagi para exhibitor untuk menunjukkan karya-karya mereka, baik yang masih dalam tahap pengembangan ataupun yang sudah jadi. Karya-karya mereka merupakan karya-karya yang kreatif, inovatif, dan terkini.
+        </div>
+       </div>
+       <div className="photo-slider">IMAGE HERE</div>
+      </Body>
     );
   }
 }
 
 export default Home;
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 0 8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background: ${props => props.theme.color.white};
-`;
 
 const Body = styled.div`
   display: flex;
@@ -60,16 +49,14 @@ const Body = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  .logoContainer {
-    width: 30rem;
+  .photo-slider {
+    width: 100%;
+    height: 50vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
-    .logoRistek {
-      height: 5rem;
-    }
+    border: solid 1rem;
   }
   .header-image {
     width: 100%;
@@ -110,45 +97,47 @@ const Body = styled.div`
     }
   }
   .showcase-section {
-    margin-top: 10rem;
-    .showcase-header {
+    margin-top: 5rem;
+    width: 100%;
+    height: 35vh;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    .showcase-header-logo {
       width: 100%;
-      height: 60vh;
-      position: relative;
+      height: inherit;
+      position: absolute;
       display: flex;
-      flex-direction: row;
       align-items: flex-start;
-  
-      .showcase-header-logo {
-        width: 100%;
-        height: inherit;
-        position: absolute;
-        display: flex;
-        align-items: flex-start;
-  
-        img {
-          height: 5rem;
-          width: 3rem;
-          object-fit: contain;
-        }
+      z-index: -1;
+
+      img {
+        height: 10rem;
+        width: 10rem;
+        object-fit: contain;
       }
     }
     .showcase-title {
       width: 100%;
       height: 60vh;
-      position: relative;
+      position: absolute;
       display: flex;
       flex-direction: row;
       align-items: flex-start;
       span {
         font-family: ${props => props.theme.font.jaapokki};
-        font-size: 2.5rem;
+        font-size: 3.5rem;
+        padding-left: 3rem;
+        text-transform: uppercase;
       }
     }
     .showcase-text {
       display: flex;
-      align-items: flex-start;
-      width: 100%%;
+      align-items: flex-end;
+      width: 90%;
+      padding: 5rem 0 0 20rem;
+      position: relative;
       font-size: 1rem;
       font-family: ${props => props.theme.font.jaapokki};
     }
