@@ -54,9 +54,7 @@ export default class AuthenticatedRoute extends React.Component {
       return null;
     }
     return (
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     );
   }
 }

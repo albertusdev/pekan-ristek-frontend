@@ -5,10 +5,11 @@ const Button = styled(({ isActive, ...props }) => <button {...props} />)`
   background: ${props => props.theme.color.yellowUI};
   border: none;
   border-radius: 0.5rem;
-  color: ${props => props.theme.color.black};
+  color: ${props => props.theme.color.white};
   display: flex;
   display: ${props => !props.isActive && 'none'};
   font-family: ${props => props.theme.font.helvetica};
+  font-weight: bold;
   margin: 1rem 0;
   padding: 1rem 0;
   width: 50%;

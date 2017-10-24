@@ -28,7 +28,6 @@ export async function signup({
 }
 
 export async function getUser({ id }) {
-  console.log('getting user ', id);
   return request.get(apiURL.user(id));
 }
 
