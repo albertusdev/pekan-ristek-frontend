@@ -99,7 +99,7 @@ export default class UserProfile extends Component {
       <Container>
         <Button onClick={() => this.goBackToDashboard()}>Go back to dashboard</Button>
         <h2>Edit Profile</h2>
-        <Form>
+        <Form horizontal>
           <InputIcon
             disabled={user && user.is_internal}
             placeholder="first name"

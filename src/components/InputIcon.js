@@ -1,31 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, InputGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Row, Col, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 import styled from 'styled-components';
-
-function InputIcon(props) {
-  return (
-    <StyledFormGroup validationState={props.validationState}>
-      <Label>
-        {props.label}
-      </Label>
-      <InputGroup>
-        <FormControl
-          {...props.name && { name: props.name }}
-          {...props}
-          type={props.type}
-          onChange={props.onChange}
-          placeholder={props.placeholder}
-          value={props.value}
-        />
-      </InputGroup>
-      {!!props.help &&
-        <HelpBlock>
-          {props.help}
-        </HelpBlock>}
-    </StyledFormGroup>
-  );
-}
 
 const StyledFormGroup = styled(FormGroup)`
   padding-top: 0.5rem;
@@ -49,6 +25,32 @@ const Label = styled(ControlLabel)`
   font-weight: 400;
   text-transform: uppercase;
 `;
+
+function InputIcon(props) {
+  return (
+    <StyledFormGroup validationState={props.validationState} horizontal>
+      <Row>
+        <Col componentClass={Label} sm={5}>
+          {props.label}
+        </Col>
+        <Col sm={7}>
+          <FormControl
+            {...props.name && { name: props.name }}
+            {...props}
+            type={props.type}
+            onChange={props.onChange}
+            placeholder={props.placeholder}
+            value={props.value}
+          />
+        </Col>
+      </Row>
+      {!!props.help &&
+        <HelpBlock>
+          {props.help}
+        </HelpBlock>}
+    </StyledFormGroup>
+  );
+}
 
 InputIcon.defaultProps = {
   validationState: null,

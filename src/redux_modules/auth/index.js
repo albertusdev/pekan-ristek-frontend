@@ -6,6 +6,7 @@ const ERROR_SET = 'app/auth/error_set';
 const LOADING = 'app/auth/loading';
 const LOADING_COMPLETE = 'app/auth/loading_complete';
 const PROFILE_UPDATE = 'app/auth/profile_update';
+const PASSWORD_UPDATE = 'app/auth/password_update';
 
 const initialState = {
   dry: true,
@@ -14,6 +15,7 @@ const initialState = {
   login: false,
   token: '',
   user: null,
+  updatePasswordSuccess: false,
 };
 
 // Reducer
@@ -26,9 +28,11 @@ export default function reducer(state = initialState, action) {
     case ERROR_SET:
       return { ...state, error: action.payload, dry: false };
     case LOADING:
-      return { ...state, loading: true, dry: false };
+      return { ...state, loading: true, dry: false, updatePasswordSuccess: false };
     case LOADING_COMPLETE:
       return { ...state, loading: false };
+    case PASSWORD_UPDATE:
+      return { ...state, updatePasswordSuccess: true };
     case PROFILE_UPDATE:
       return { ...state, user: action.payload };
     default:
@@ -75,7 +79,6 @@ export function logout() {
     window.localStorage.removeItem('pekanRistekToken');
     window.localStorage.removeItem('pekanRistekId');
     dispatch(clearAuth());
-    await api.ssoLogout();
   };
 }
 
@@ -149,6 +152,21 @@ export function updateProfile({ id, email, first_name, institution, last_name, p
         phone,
       });
       dispatch({ type: PROFILE_UPDATE, payload: body });
+      dispatch(completeLoading());
+    } catch (e) {
+      dispatch(setError(e.message));
+      dispatch(completeLoading());
+    }
+  };
+}
+
+export function updatePassword({ id, old_password, new_password }) {
+  return async dispatch => {
+    try {
+      dispatch(loading());
+      const { body } = await api.updatePassword({ id, old_password, new_password });
+      const { user } = body;
+      if (user) dispatch({ type: PASSWORD_UPDATE });
       dispatch(completeLoading());
     } catch (e) {
       dispatch(setError(e.message));

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import squares from '../assets/squares.png';
 import { DASHBOARD_PATH, LOGIN_PATH, LOGOUT_PATH } from '../common/routing';
 
 @connect(state => ({ auth: state.auth }))
@@ -17,7 +18,9 @@ export default class Navigation extends React.Component {
     const { login } = this.props.auth;
     return (
       <Container>
-        <div className="logo" />
+        <button className="logo" onClick={() => this.props.history.push('/')}>
+          <img src={squares} alt="logo-pekan-ristek" />
+        </button>
         <div className="navigation">
           <button onClick={() => this.props.history.push('/')}>Home</button>
           <button onClick={() => this.props.history.push(DASHBOARD_PATH)}>Dashboard</button>
@@ -45,9 +48,19 @@ const Container = styled.div`
   z-index: 1;
   background-color: ${props => props.theme.color.white};
   .logo {
-    width: 3rem;
-    height: 1rem;
-    background: ${props => props.theme.color.yellowUI};
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    &:focus {
+      outline: none;
+    }
+    img {
+      width: 3rem;
+      cursor: pointer;
+      align-self: center;
+      object-fit: scale-down;
+    }
   }
 
   .navigation {

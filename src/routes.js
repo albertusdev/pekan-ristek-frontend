@@ -64,7 +64,7 @@ export default (
           <AuthenticatedRoute authenticated={false}>
             <Wrapper>
               <Body>
-                <Navigation history={props.history}/>
+                <Navigation history={props.history} />
                 <Comp {...props} />
               </Body>
               <Footer />

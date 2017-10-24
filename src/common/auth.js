@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { reloadAuth, logout as authLogout } from '../redux_modules/auth';
 import { LOGIN_PATH } from './routing';
+import { ssoLOGOUT } from './apiUrl';
 
 @withRouter
 @connect(
@@ -45,8 +46,13 @@ export default class AuthenticatedRoute extends React.Component {
   render() {
     const { auth, authenticated, children, logout } = this.props;
     if (logout) {
-      this.props.history.push(LOGIN_PATH);
-      this.props.authLogout();
+      const sso = window.open(ssoLOGOUT, 'SSO UI', 'width=600, height=600');
+      setTimeout(() => {
+        sso.postMessage('close window please', '*');
+        sso.close();
+        this.props.authLogout();
+        this.props.history.push(LOGIN_PATH);
+      }, 2000);
       return null;
     }
     if (authenticated && !auth.dry && !auth.loading && !auth.login) {

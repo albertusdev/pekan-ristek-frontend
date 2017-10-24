@@ -108,12 +108,14 @@ export function joinTeam({ token }) {
   };
 }
 
-export function loadTeam(competition) {
+export function loadTeam({ code }) {
   return async dispatch => {
     try {
-      const { body } = await api.getTeam(competition);
+      const { body } = await api.getTeam({ code });
+      dispatch({ type: TEAM_SET, payload: { has_registered: true, ...body } });
     } catch (e) {
       dispatch(setError(e.message));
+      dispatch(hasNotRegisteredYet());
       dispatch(completeLoading());
     }
   };

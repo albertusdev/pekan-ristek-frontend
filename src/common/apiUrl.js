@@ -12,4 +12,4 @@ export const updatePassword = id => `${users}update-password/${id}/`;
 export const teams = base('/teams/');
 export const createTeam = `${teams}create-team/`;
 export const joinTeam = `${teams}join-team/`;
-export const team = competition => `${base('/teams/')}${competition}`;
+export const team = competition => `${base('/teams/')}${competition}/`;

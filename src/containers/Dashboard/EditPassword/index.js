@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Form, FormControl } from 'react-bootstrap';
+import { Alert, Button, Form, FormControl } from 'react-bootstrap';
 import { updatePassword } from '../../../redux_modules/auth';
 import { media } from '../../../common/theme';
 import { DASHBOARD_PATH } from '../../../common/routing';
@@ -21,7 +21,7 @@ export default class UserProfile extends Component {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
-    updateProfile: PropTypes.func.isRequired,
+    updatePassword: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -31,6 +31,7 @@ export default class UserProfile extends Component {
       oldPassword: '',
       newPassword: '',
       reNewPassword: '',
+      hasUpdatedPassword: false,
     };
   }
 
@@ -43,65 +44,112 @@ export default class UserProfile extends Component {
     this.props.history.push(DASHBOARD_PATH);
   }
 
-  async submitEditProfile() {
-    const { firstName, lastName, email, phone, institution } = this.state;
+  async submitEditPassword() {
+    const { oldPassword, newPassword } = this.state;
     const { user } = this.props.auth;
     if (user) {
-      const { id, is_internal } = user;
+      const { id } = user;
       const update = {
         id,
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        phone,
-        institution,
+        old_password: oldPassword,
+        new_password: newPassword,
       };
-      // eslint-disable-next-line
-      if (is_internal) delete update['institution'];
-      await this.props.updateProfile(update);
-      this.toggleEditProfile();
+      await this.props.updatePassword(update);
+      this.setState({ hasUpdatedPassword: true });
+      if (this.props.auth.updatePasswordSuccess) {
+        setTimeout(() => this.props.history.push(DASHBOARD_PATH), 3000);
+      }
     }
   }
 
-  toggleEditProfile() {
-    this.setState({ isEditProfile: !this.state.isEditProfile });
+  generateOldPasswordValidationState() {
+    if (this.state.oldPassword.length < 8) return 'error';
+    return 'success';
   }
 
-  toggleEditPassword() {
-    this.setState({ isEditPassword: !this.state.isEditPassword });
+  generateOldPasswordHelp() {
+    if (this.state.oldPassword.length < 8) return 'Password length must be at least 8';
+    return null;
+  }
+
+  generatePasswordValidationState() {
+    if (this.state.newPassword.length >= 8) return 'success';
+    return 'error';
+  }
+
+  generatePasswordHelp() {
+    const validationState = this.generatePasswordValidationState();
+    if (validationState === 'error') {
+      return 'Password length must be at least 8';
+    }
+    return null;
+  }
+
+  generateReEnterPasswordValidationState() {
+    if (this.generatePasswordValidationState() === 'error') return 'error';
+    if (this.state.reNewPassword !== this.state.newPassword) return 'error';
+    return 'success';
+  }
+
+  generateReEnterPasswordHelp() {
+    const validationState = this.generateReEnterPasswordValidationState();
+    if (this.generatePasswordValidationState() === 'error') {
+      return 'Password length must be at least 8';
+    }
+    if (validationState === 'error') {
+      return `Password doesn't match`;
+    }
+    return null;
   }
 
   render() {
-    const { user, loading } = this.props.auth;
-    const { firstName, lastName, email, phone, institution } = this.state;
-    const { newPassword, oldPassword, reNewPassword } = this.state;
+    const { user, loading, updatePasswordSuccess } = this.props.auth;
+    const { newPassword, oldPassword, reNewPassword, hasUpdatedPassword } = this.state;
     return (
       <Container>
         <Button onClick={() => this.goBackToDashboard()}>Go back to dashboard</Button>
         <h2>Edit Password</h2>
+        {hasUpdatedPassword &&
+          updatePasswordSuccess &&
+          <Alert bsStyle="success">Successfully update password</Alert>}
+        {hasUpdatedPassword &&
+          !updatePasswordSuccess &&
+          <Alert bsStyle="danger">Update password fail.</Alert>}
         <Form>
           <InputIcon
-            placeholder="old password"
-            name="oldPassword"
             label="Old Password"
+            validationState={this.generateOldPasswordValidationState()}
+            help={this.generateOldPasswordHelp()}
+            name="oldPassword"
+            onChange={e => this.handleInputChange(e)}
+            placeholder="old password"
+            type="password"
             value={oldPassword}
-            onChange={e => this.handleInputChange(e)}
           />
           <InputIcon
-            placeholder="new password"
-            name="newPassword"
+            help={this.generatePasswordHelp()}
             label="New Password"
-            value={newPassword}
+            name="newPassword"
             onChange={e => this.handleInputChange(e)}
+            placeholder="new password"
+            type="password"
+            validationState={this.generatePasswordValidationState()}
+            value={newPassword}
           />
           <InputIcon
-            placeholder="re-enter new password"
-            name="reNewPassword"
+            help={this.generateReEnterPasswordHelp()}
             label="Re-enter New Password"
-            value={reNewPassword}
+            name="reNewPassword"
             onChange={e => this.handleInputChange(e)}
+            placeholder="re-enter new password"
+            type="password"
+            validationState={this.generateReEnterPasswordValidationState()}
+            value={reNewPassword}
           />
-          <Button onClick={() => this.submitEditPassword()} disabled={loading}>
+          <Button
+            onClick={() => this.submitEditPassword()}
+            disabled={loading || this.generateReEnterPasswordValidationState() === 'error'}
+          >
             {!loading && 'Save'}
             {loading && <LoadingButtonComponent />}
           </Button>

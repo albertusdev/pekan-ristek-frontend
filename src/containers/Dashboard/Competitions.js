@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
-import { updateProfile, updatePassword } from '../../redux_modules/auth';
-import { createTeam, joinTeam } from '../../redux_modules/competition';
+import { Button, ControlLabel, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
+import { createTeam, loadTeam, joinTeam } from '../../redux_modules/competition';
 import { media } from '../../common/theme';
 import Card from '../../components/Card';
 import InputIcon from '../../components/InputIcon';
@@ -26,13 +25,15 @@ const CTF_RULEBOOK_URL = 'https://drive.google.com/ipsc';
     auth: state.auth,
     competition: state.competition,
   }),
-  { createTeam, joinTeam }
+  { createTeam, loadTeam, joinTeam }
 )
 export default class Competitions extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     competition: PropTypes.object.isRequired,
+    // Redux Thunks
     createTeam: PropTypes.object.isRequired,
+    loadTeam: PropTypes.object.isRequired,
     joinTeam: PropTypes.object.isRequired,
   };
 
@@ -81,8 +82,9 @@ export default class Competitions extends Component {
     this.state = Object.assign({}, Competitions.INITIAL_STATE);
   }
 
-  setAsActive(competition) {
+  async setAsActive(competition) {
     this.setState({ active: competition, hasFocus: true });
+    await this.props.loadTeam({ code: competition.code });
   }
 
   clearActive() {
@@ -113,7 +115,7 @@ export default class Competitions extends Component {
   render() {
     const competition = Competitions.COMPETITIONS;
     const { hasFocus } = this.state;
-    const { hasRegistered } = this.props.competition;
+    const { hasRegistered, loading } = this.props.competition;
     return (
       <Container>
         {!hasFocus &&
@@ -127,8 +129,8 @@ export default class Competitions extends Component {
               </div>
               <div className="bottom">
                 <Button
-                  onClick={() =>
-                    this.setAsActive({ code: competition[key].code, title: competition[key].title })}
+                  onClick={() => this.setAsActive({ ...competition[key] })}
+                  disabled={loading}
                 >
                   Join now
                 </Button>
@@ -140,7 +142,11 @@ export default class Competitions extends Component {
           )}
         {hasFocus &&
           hasRegistered &&
-          <Card width="100%">
+          <Card className="solo" width="100%">
+            <BackButton onClick={() => this.clearActive()}>
+              <Glyphicon glyph="arrow-left" />
+              <span>Back</span>
+            </BackButton>
             <span className="title">
               {this.state.active.title}
             </span>
@@ -163,53 +169,75 @@ export default class Competitions extends Component {
           </Card>}
         {hasFocus &&
           !hasRegistered &&
-          <Card width="100%">
+          <Card className="solo" width="100%">
+            <BackButton onClick={() => this.clearActive()}>
+              <Glyphicon glyph="arrow-left" />
+              <span>Back</span>
+            </BackButton>
             <span className="title">
               {this.state.active.title}
             </span>
             <Form>
-              <FormGroup>
-                <ControlLabel>Join a team</ControlLabel>
-                <FormControl
-                  name="token"
-                  onChange={e => this.handleInputChange(e)}
-                  placeholder="enter token team here"
-                  value={this.state.token}
-                />
-                <Button
-                  bsStyle="success"
-                  disabled={this.props.competition.loading}
-                  onClick={e => this.submitJoinTeam(e)}
-                >
-                  {this.state.isJoinTeamButtonClicked && <LoadingButtonComponent />}
-                  {!this.state.isJoinTeamButtonClicked && 'Submit'}
-                </Button>
-              </FormGroup>
+              <StyledFormGroup>
+                <FormTitle>Create a team</FormTitle>
+                <Flex>
+                  <FormControl
+                    name="name"
+                    onChange={e => this.handleInputChange(e)}
+                    placeholder="enter team name here"
+                    value={this.state.name}
+                  />
+                  <Button
+                    disabled={this.props.competition.loading}
+                    onClick={e => this.submitCreateTeam(e)}
+                  >
+                    {this.state.isCreateTeamButtonClicked && <LoadingButtonComponent />}
+                    {!this.state.isCreateTeamButtonClicked && 'Submit'}
+                  </Button>
+                </Flex>
+              </StyledFormGroup>
             </Form>
             <Form>
-              <FormGroup>
-                <ControlLabel>Create a team</ControlLabel>
-                <FormControl
-                  name="name"
-                  onChange={e => this.handleInputChange(e)}
-                  placeholder="enter team name here"
-                  value={this.state.name}
-                />
-                <Button
-                  bsStyle="success"
-                  disabled={this.props.competition.loading}
-                  onClick={e => this.submitCreateTeam(e)}
-                >
-                  {this.state.isCreateTeamButtonClicked && <LoadingButtonComponent />}
-                  {!this.state.isCreateTeamButtonClicked && 'Submit'}
-                </Button>
-              </FormGroup>
+              <StyledFormGroup>
+                <FormTitle>Join a team</FormTitle>
+                <Flex>
+                  <FormControl
+                    name="token"
+                    onChange={e => this.handleInputChange(e)}
+                    placeholder="enter token team here"
+                    value={this.state.token}
+                  />
+                  <Button
+                    disabled={this.props.competition.loading}
+                    onClick={e => this.submitJoinTeam(e)}
+                  >
+                    {this.state.isJoinTeamButtonClicked && <LoadingButtonComponent />}
+                    {!this.state.isJoinTeamButtonClicked && 'Submit'}
+                  </Button>
+                </Flex>
+              </StyledFormGroup>
             </Form>
           </Card>}
       </Container>
     );
   }
 }
+
+const BackButton = styled.button`
+  border: none;
+  background: none;
+  color: ${props => props.theme.color.gray};
+  display: flex;
+  font-family: ${props => props.theme.font.jaapokki};
+  font-size: ${props => props.theme.size.font.medium};
+  margin: 1rem;
+  > * {
+    margin-right: 1rem;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Container = styled(({ column, ...props }) => <div {...props} />)`
   display: flex;
@@ -256,4 +284,22 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
       width: 80%;
     }
   }
+  .solo {
+    align-items: flex-start;
+  }
+`;
+
+const Flex = styled.div`
+  display: flex;
+`;
+
+const FormTitle = styled.div`
+  align-self: flex-start;
+  text-align: left;
+  font-family: ${props => props.theme.font.jaapokki};
+  font-size: ${props => props.theme.size.font.medium};
+`;
+
+const StyledFormGroup = styled(FormGroup)`
+  color: ${props => props.theme.color.black};
 `;
