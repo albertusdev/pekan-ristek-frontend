@@ -40,7 +40,6 @@ export default class UserProfile extends Component {
             Edit Password
           </Button>
         </ButtonsContainer>
-        <Line />
       </Container>
     );
   }
@@ -54,16 +53,22 @@ const Container = styled.div`
   justify-content: center;
   font-family: ${props => props.theme.font.jaapokki};
   margin: 2rem 0;
+  position: relative;
   .name {
     text-transform: uppercase;
     font-weight: bold;
     font-size: ${props => props.theme.size.font.medium};
+    ${media('mobile')} {
+      font-size: 1rem;
+      max-width: 100%;
+    }
   }
-`;
-
-const Line = styled.div`
+  ${media('mobile')} {
+    > * {
+      margin-left: 1rem;
+    }
+  }
   border-bottom: solid 1px ${props => props.theme.color.black};
-  width: 100%;
 `;
 
 const ButtonsContainer = styled.div`

@@ -6,7 +6,7 @@ const config = {
     API_URL: 'http://example.dev',
   },
   local: {
-    API_URL: 'http://localhost:8000',
+    API_URL: 'http://localhost:8000/pr-api',
   },
 };
 

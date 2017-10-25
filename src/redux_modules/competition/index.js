@@ -114,6 +114,7 @@ export function loadTeam({ code }) {
       dispatch(loading());
       const { body } = await api.getTeam({ code });
       dispatch({ type: TEAM_SET, payload: { has_registered: true, ...body } });
+      dispatch(completeLoading());
     } catch (e) {
       dispatch(setError(e.message));
       dispatch(hasNotRegisteredYet());

@@ -113,9 +113,17 @@ export default class Competitions extends Component {
     this.setState({ isCreateTeamButtonClicked: false });
   }
 
+  clickCreateTeam() {
+    this.setState({ isCreateTeamButtonClicked: true });
+  }
+
+  clickJoinTeam() {
+    this.setState({ isJoinTeamButtonClicked: true });
+  }
+
   render() {
     const competition = Competitions.COMPETITIONS;
-    const { hasFocus } = this.state;
+    const { hasFocus, isCreateTeamButtonClicked, isJoinTeamButtonClicked } = this.state;
     const { hasRegistered, loading } = this.props.competition;
     return (
       <Container>
@@ -129,14 +137,14 @@ export default class Competitions extends Component {
                 </span>
               </div>
               <div className="bottom">
-                <Button
+                <button
                   onClick={() => this.setAsActive({ ...competition[key] })}
                   disabled={loading}
                 >
                   Join now
-                </Button>
+                </button>
                 <a href={competition[key].rulebookURL} target="_blank">
-                  Download Rulebook
+                  <span>Download Rulebook</span>
                 </a>
               </div>
             </Card>
@@ -173,48 +181,52 @@ export default class Competitions extends Component {
               </div>}
             {!hasRegistered &&
               !loading &&
-              <div>
-                <Form>
-                  <StyledFormGroup>
-                    <FormTitle>Create a team</FormTitle>
-                    <Flex>
-                      <FormControl
-                        name="name"
-                        onChange={e => this.handleInputChange(e)}
-                        placeholder="enter team name here"
-                        value={this.state.name}
-                      />
-                      <Button
-                        disabled={this.props.competition.loading}
-                        onClick={e => this.submitCreateTeam(e)}
-                      >
-                        {this.state.isCreateTeamButtonClicked && <LoadingButtonComponent />}
-                        {!this.state.isCreateTeamButtonClicked && 'Submit'}
-                      </Button>
-                    </Flex>
-                  </StyledFormGroup>
-                </Form>
-                <Form>
-                  <StyledFormGroup>
-                    <FormTitle>Join a team</FormTitle>
-                    <Flex>
-                      <FormControl
-                        name="token"
-                        onChange={e => this.handleInputChange(e)}
-                        placeholder="enter token team here"
-                        value={this.state.token}
-                      />
-                      <Button
-                        disabled={this.props.competition.loading}
-                        onClick={e => this.submitJoinTeam(e)}
-                      >
-                        {this.state.isJoinTeamButtonClicked && <LoadingButtonComponent />}
-                        {!this.state.isJoinTeamButtonClicked && 'Submit'}
-                      </Button>
-                    </Flex>
-                  </StyledFormGroup>
-                </Form>
-              </div>}
+              !isCreateTeamButtonClicked &&
+              !isJoinTeamButtonClicked &&
+              <ButtonsContainer>
+                <CreateTeamButton onClick={() => this.clickCreateTeam()}>Create Team</CreateTeamButton>
+                <JoinTeamButton onClick={() => this.clickJoinTeam()}>Join Team</JoinTeamButton>
+              </ButtonsContainer>}
+            {!hasRegistered &&
+              !loading &&
+              isCreateTeamButtonClicked &&
+              <Form>
+                <StyledFormGroup>
+                  <FormTitle>Create a team</FormTitle>
+                  <Flex>
+                    <FormControl
+                      name="name"
+                      onChange={e => this.handleInputChange(e)}
+                      placeholder="enter team name here"
+                      value={this.state.name}
+                    />
+                    <Button disabled={loading} onClick={e => this.submitCreateTeam(e)}>
+                      {loading && <LoadingButtonComponent />}
+                      {!loading && 'Submit'}
+                    </Button>
+                  </Flex>
+                </StyledFormGroup>
+              </Form>}
+            {!hasRegistered &&
+              !loading &&
+              isJoinTeamButtonClicked &&
+              <Form>
+                <StyledFormGroup>
+                  <FormTitle>Join a team</FormTitle>
+                  <Flex>
+                    <FormControl
+                      name="token"
+                      onChange={e => this.handleInputChange(e)}
+                      placeholder="enter token team here"
+                      value={this.state.token}
+                    />
+                    <Button disabled={loading} onClick={e => this.submitJoinTeam(e)}>
+                      {loading && <LoadingButtonComponent />}
+                      {!loading && 'Submit'}
+                    </Button>
+                  </Flex>
+                </StyledFormGroup>
+              </Form>}
           </Card>}
       </Container>
     );
@@ -253,7 +265,6 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    height: 20rem;
     justify-content: space-between;
     text-align: center;
     position: relative;
@@ -279,19 +290,75 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
     .bottom {
       display: flex;
       flex-direction: column;
+      margin-bottom: 1rem;
+      button {
+        border: none;
+        background-color: ${props => props.theme.color.black};
+        color: ${props => props.theme.color.white};
+        padding: 0.5rem 0;
+      }
+      a {
+        text-decoration: none;
+        border: solid 1px ${props => props.theme.color.black};
+        background-color: ${props => props.theme.color.white};
+        color: ${props => props.theme.color.black};
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        span {
+          flex-grow: 0;
+        }
+      }
+    }
+    @media screen and (min-width: ${props => props.theme.breakpoint.mobile}) {
+      min-height: 24rem;      
     }
     ${media('mobile')} {
-      width: 80%;
+      width: 100%;
+      border-radius: 0;
+      margin-top: 1rem;
+      align-items: flex-start;
+      height: auto;
+      .top {
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+        justify-content: flex-start;
+        img {
+          height: 2rem;
+          align-self: center;
+          object-fit: scale-down;
+          margin: 0 1rem 0 0;
+        }
+        .title {
+          flex-grow: 0;
+          max-width: 100%;
+          font-size: 1.25rem;
+          text-align: left;
+        }
+      }
+      .bottom {
+        align-self: flex-end;
+        min-height: auto;
+        height: auto;
+        margin-bottom: 1rem;
+      }
     }
   }
   .solo {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    padding-bottom: 3rem;
+    width: 100%;
+    border: none;
+    .title {
+      text-decoration: underline;
+    }
   }
 `;
 
-const Flex = styled.div`
-  display: flex;
-`;
+const Flex = styled.div`display: flex;`;
 
 const FormTitle = styled.div`
   align-self: flex-start;
@@ -302,4 +369,33 @@ const FormTitle = styled.div`
 
 const StyledFormGroup = styled(FormGroup)`
   color: ${props => props.theme.color.black};
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const CreateTeamButton = styled.button`
+  border: solid 1px ${props => props.theme.color.black};
+  color: ${props => props.theme.color.black};
+  background-color: ${props => props.theme.color.white};
+  &:focus {
+    outline: none;
+  }
+  padding: 1rem 0;
+  width: 100%;
+`;
+
+const JoinTeamButton = styled.button`
+  border: none;
+  background-color: ${props => props.theme.color.black};
+  color: ${props => props.theme.color.white};
+  &:focus {
+    outline: none;
+  }
+  padding: 1rem 0;
+  width: 100%;
 `;

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Container = styled.div`
   position: absolute;
-  z-index: 99;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;

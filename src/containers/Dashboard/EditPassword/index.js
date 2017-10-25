@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Alert, Button, Form, FormControl } from 'react-bootstrap';
+import { Alert, Button, Form, FormControl, Glyphicon } from 'react-bootstrap';
 import { updatePassword } from '../../../redux_modules/auth';
 import { media } from '../../../common/theme';
 import { DASHBOARD_PATH } from '../../../common/routing';
@@ -107,7 +107,10 @@ export default class UserProfile extends Component {
     const { newPassword, oldPassword, reNewPassword, hasUpdatedPassword } = this.state;
     return (
       <Container>
-        <Button onClick={() => this.goBackToDashboard()}>Go back to dashboard</Button>
+        <BackButton onClick={() => this.goBackToDashboard()}>
+          <Glyphicon glyph="arrow-left" />
+          <span>Back</span>
+        </BackButton>
         <h2>Edit Password</h2>
         {hasUpdatedPassword &&
           updatePasswordSuccess &&
@@ -159,6 +162,12 @@ export default class UserProfile extends Component {
   }
 }
 
+const BackButton = styled.button`
+  border: none;
+  background: none;
+  display: flex;
+`;
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -171,6 +180,11 @@ const Container = styled.div`
     text-transform: uppercase;
     font-weight: bold;
     font-size: ${props => props.theme.size.font.medium};
+  }
+  ${media('mobile')} {
+    > * {
+      margin-left: 1rem;
+    }
   }
 `;
 

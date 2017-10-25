@@ -46,8 +46,8 @@ export default (
         render={props =>
           <AuthenticatedRoute>
             <Wrapper>
+              <Navigation history={props.history} />
               <Body>
-                <Navigation history={props.history} />
                 <Comp {...props} />
               </Body>
               <Footer />
@@ -63,8 +63,8 @@ export default (
         render={props =>
           <AuthenticatedRoute authenticated={false}>
             <Wrapper>
+              <Navigation history={props.history} />
               <Body>
-                <Navigation history={props.history} />
                 <Comp {...props} />
               </Body>
               <Footer />
@@ -81,15 +81,18 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 98vw;
+  width: 100%;
   min-height: 100vh;
+  position: relative;
 `;
 
 const Body = styled.div`
   width: 80%;
   align-self: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
   ${media('mobile')} {
     width: 100%;
   }

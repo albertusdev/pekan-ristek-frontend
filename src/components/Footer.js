@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import logoTraveloka from '../assets/logo-traveloka.png';
 import logoDewaweb from '../assets/logo-dewa-web.png';
+import { media } from '../common/theme';
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +25,13 @@ const Container = styled.div`
     }
     .logo-Dewaweb {
       margin: 1rem 0;
-      height: ${props => props.theme.height.logo.medium};
+      height: ${props => props.theme.height.logo.large};
+    }
+  }
+  ${media('mobile')} {
+    .logo-container {
+      flex-direction: column;
+      align-items: center;
     }
   }
 `;
