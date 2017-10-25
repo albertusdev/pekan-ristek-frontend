@@ -5,5 +5,5 @@ module.exports = (options, req) => ({
   env: {
     NODE_ENV: process.env.NODE_ENV || 'development',
   },
-  port: 9009,
+  port: 4000,
 });
