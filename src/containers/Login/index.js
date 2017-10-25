@@ -86,11 +86,7 @@ class Login extends Component {
     const { username, password, isUIStudent } = this.state;
     return (
       <Body>
-        <Card width="80%" mobileWidth="100%">
-          <div className="left">
-            <img src={squares} className="squares" alt="square logo" />
-            <PekanRistek>Pekan Ristek</PekanRistek>
-          </div>
+        <Card width="50vw" mobileWidth="100%">
           <div className="right">
             <PageTitle>Sign in</PageTitle>
             <CenterForm isActive={!isUIStudent}>
@@ -120,8 +116,9 @@ class Login extends Component {
             </CenterForm>
             <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
             <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
-              {isUIStudent && <span>Not an UI student? Sign in manually.</span>}
-              {!isUIStudent && <span>Doesn't have account yet? Sign up.</span>}
+              {/*isUIStudent && <span>Not an UI student? Sign in manually.</span>*/}
+              {/*!isUIStudent &&
+                <span>Doesn't have account yet? Sign up.</span>*/}
             </EnforceSSOToggler>
           </div>
         </Card>
@@ -201,6 +198,7 @@ const EnforceSSOToggler = styled.button`
   &:focus {
     outline: none;
   }
+  font-family: ${props => props.theme.font.jaapokki};
 `;
 
 const PageTitle = styled.div`

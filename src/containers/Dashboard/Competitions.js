@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, ControlLabel, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
+import { Button, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
 import { createTeam, loadTeam, joinTeam } from '../../redux_modules/competition';
 import { media } from '../../common/theme';
 import Card from '../../components/Card';
@@ -16,11 +16,11 @@ import logoIPSC from '../../assets/logo-ipsc.png';
 import logoCTF from '../../assets/logo-ctf.png';
 import logoUIUX from '../../assets/logo-uiux.png';
 
-const IPSC_RULEBOOK_URL = 'https://drive.google.com/ipsc';
-const CITD_RULEBOOK_URL = 'https://drive.google.com/ipsc';
-const UIUX_RULEBOOK_URL = 'https://drive.google.com/ipsc';
-const CTF_RULEBOOK_URL = 'https://drive.google.com/ipsc';
+const IPSC_RULEBOOK_URL = 'https://docs.google.com/document/d/1OqYcydn7CdQKQ-SLE1ERgwaYDiPehKwKYbCKi97f6qo/edit?usp=sharing';
+const CITD_RULEBOOK_URL = 'https://docs.google.com/document/d/1W-P7aN9KcdY4koj-XkOV9vU96rQ_dTveWBopSlP2-ko/edit?usp=sharing';
+const UIUX_RULEBOOK_URL = 'https://docs.google.com/document/d/1OqYcydn7CdQKQ-SLE1ERgwaYDiPehKwKYbCKi97f6qo/edit?usp=sharing';
 
+const CTF_RULEBOOK_URL = '';
 @connect(
   state => ({
     auth: state.auth,
@@ -121,6 +121,16 @@ export default class Competitions extends Component {
     this.setState({ isJoinTeamButtonClicked: true });
   }
 
+  copyToken(event) {
+    event.preventDefault();
+    const textField = document.createElement('textarea');
+    textField.innerText = this.props.competition.token;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand('copy');
+    textField.remove();
+  }
+
   render() {
     const competition = Competitions.COMPETITIONS;
     const { hasFocus, isCreateTeamButtonClicked, isJoinTeamButtonClicked } = this.state;
@@ -155,28 +165,37 @@ export default class Competitions extends Component {
               <Glyphicon glyph="arrow-left" />
               <span>Back</span>
             </BackButton>
-            <span className="title">
-              {this.state.active.title}
-            </span>
+            {!hasRegistered &&
+              <span className="title">
+                {this.state.active.title}
+              </span>}
             {loading && <LoadingIndicator />}
             {hasRegistered &&
               !loading &&
-              <div>
-                <div className="alert-message">You have joined this competition</div>
+              <div className="team-details-container">
                 <div className="team-name">
                   {this.props.competition.name}
                 </div>
-                <div className="team-token">
-                  Your token is: {this.props.competition.token}
+                <div className="competition-name">
+                  {this.state.active.code}
                 </div>
-                <div className="team-members">
-                  Team members:
-                  {this.props.competition.members &&
-                    this.props.competition.members.map(member =>
-                    <div className="team-member">
-                      {`${member.first_name} ${member.last_name}`}
-                    </div>
-                  )}
+                <div className="team-details">
+                  <div className="form-label">Team token:</div>
+                  <Form>
+                    <FormGroup className="team-token">
+                      <FormControl value={this.props.competition.token} />
+                    </FormGroup>
+                    <button className="copy-button" onClick={e => this.copyToken(e)}>
+                      Copy token
+                    </button>
+                  </Form>
+                  <div className="team-members">Team members</div>
+                  <ol>
+                    {this.props.competition.members &&
+                      this.props.competition.members.map(member =>
+                      <li className="team-member">{`${member.first_name} ${member.last_name}`}</li>
+                    )}
+                  </ol>
                 </div>
               </div>}
             {!hasRegistered &&
@@ -184,15 +203,19 @@ export default class Competitions extends Component {
               !isCreateTeamButtonClicked &&
               !isJoinTeamButtonClicked &&
               <ButtonsContainer>
-                <CreateTeamButton onClick={() => this.clickCreateTeam()}>Create Team</CreateTeamButton>
-                <JoinTeamButton onClick={() => this.clickJoinTeam()}>Join Team</JoinTeamButton>
+                <CreateTeamButton onClick={() => this.clickCreateTeam()}>
+                  {this.state.active.code !== 'citd' && 'Create Team'}
+                  {this.state.active.code === 'citd' && 'Register'}
+                </CreateTeamButton>
+                {this.state.active.code !== 'citd' &&
+                  <JoinTeamButton onClick={() => this.clickJoinTeam()}>Join Team</JoinTeamButton>}
               </ButtonsContainer>}
             {!hasRegistered &&
               !loading &&
               isCreateTeamButtonClicked &&
               <Form>
                 <StyledFormGroup>
-                  <FormTitle>Create a team</FormTitle>
+                  <FormTitle>Team Name</FormTitle>
                   <Flex>
                     <FormControl
                       name="name"
@@ -212,7 +235,7 @@ export default class Competitions extends Component {
               isJoinTeamButtonClicked &&
               <Form>
                 <StyledFormGroup>
-                  <FormTitle>Join a team</FormTitle>
+                  <FormTitle>Team Token</FormTitle>
                   <Flex>
                     <FormControl
                       name="token"
@@ -348,12 +371,65 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
   .solo {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 3rem;
-    width: 100%;
+    flex-wrap: no;
+    align-items: center;
+    justify-content: center;
+    @media screen and (min-width: ${props => props.theme.breakpoint.mobile}) {
+      min-width: 30rem;
+    }
+    > button {
+      align-self: flex-start;
+    }
     border: none;
     .title {
       text-decoration: underline;
+    }
+    .team-details-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .team-name {
+      text-decoration: underline;
+      text-transform: uppercase;
+      font-family: ${props => props.theme.font.jaapokki};
+      font-size: ${props => props.theme.size.font.medium};
+    }
+    .competition-name {
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      margin-bottom: 0;
+    }
+    .form-label {
+      font-weight: bold;
+      text-align: left;
+      font-size: 1.5rem;
+      font-family: ${props => props.theme.font.jaapokki};
+    }
+    .copy-button {
+      border: none;
+      padding: none;
+      background-color: ${props => props.theme.color.black};
+      border-radius: 0.5rem;
+      color: ${props => props.theme.color.white};
+      &:focus {
+        outline: none;
+      }
+    }
+    form {
+      align-self: flex-start;
+      display: flex;
+      margin-bottom: 2rem;
+    }
+    .team-members {
+      text-align: left;
+      font-family: ${props => props.theme.font.jaapokki};
+      font-size: 1.5rem;
+      .team-member {
+        margin: 0;
+        font-size: 1rem;
+      }
     }
   }
 `;
