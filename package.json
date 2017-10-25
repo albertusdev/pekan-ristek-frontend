@@ -3,11 +3,6 @@
   "version": "0.2.0",
   "devDependencies": {
     "ava": "^0.19.1",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^2.0.0-rc1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -23,7 +18,12 @@
     "webpack": "^3.2.0"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "bootstrap": "^3.3.7",
     "history": "^4.6.1",
     "prop-types": "^15.5.10",
@@ -63,5 +63,6 @@
       "./src/common/testSetup.js"
     ],
     "babel": "inherit"
-  }
+  },
+  "homepage": "http://ristek.cs.ui.ac.id/pekan-ristek"
 }
