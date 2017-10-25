@@ -5,7 +5,17 @@ import squaresParticle from '../../assets/squares-particel.svg';
 import Footer from '../../components/Footer';
 import Navigation from '../../components/Navigation';
 import {LOGIN_PATH} from '../../common/routing';
-import showcaseLogo from '../../assets/logo-showcase.svg';
+// IMPORT FROM ASSETS LOGO
+import logoIPSC from '../../assets/logo-ipsc.svg';
+import logoCTF from '../../assets/logo-ctf.svg';
+import logoUIUX from '../../assets/logo-uiux.svg';
+import logoCITD from '../../assets/logo-citd.svg';
+import logoMainEvent from '../../assets/logo-main-event.svg';
+import logoPlayground from '../../assets/logo-playground.svg';
+import logoSeminar from '../../assets/logo-seminar.svg';
+import logoShowcase from '../../assets/logo-showcase.svg';
+import logoPekanRistek from '../../assets/logo-pekan-ristek.jpg';
+import logoRistek from '../../assets/logo-ristek.png';
 
 class Home extends Component {
   render() {
@@ -19,7 +29,7 @@ class Home extends Component {
         <div className="header-text">
           <span>Pekan Ristek 2017</span>
           <div className="text">
-            merupakan ajang tahunan yang diselenggarakan oleh Ristek Fasilkom UI, bertujuan untuk meningkatkan minat dan ketertarikan terhadap dunia IT. Tahun ini, Pekan Ristek membawakan tema "IT Strikes Back"
+            Merupakan ajang tahunan yang diselenggarakan oleh Ristek Fasilkom UI, bertujuan untuk meningkatkan minat dan ketertarikan terhadap dunia IT. Tahun ini, Pekan Ristek membawakan tema "IT Strikes Back"
           </div>
         </div>
         <div className="showcase-section">
@@ -28,7 +38,7 @@ class Home extends Component {
             </div>
           <div className="showcase-header-logo">
           {/* @TODO change to svg and fix the dimension */}
-            <img src={showcaseLogo} />
+            <img src={logoShowcase} />
           </div>
           <div className="showcase-text">
             Ajang bagi para exhibitor untuk menunjukkan karya-karya mereka, baik yang masih dalam tahap pengembangan ataupun yang sudah jadi. Karya-karya mereka merupakan karya-karya yang kreatif, inovatif, dan terkini.
@@ -44,30 +54,30 @@ class Home extends Component {
           </div>
           <div className="competition-card-container">
             <div className="competition-card">
-              <h1>Title</h1>
+              <h1>UI/UX</h1>
               <div className="competition-logo">
-                <img src={showcaseLogo} alt="" />
+                <img src={logoUIUX} alt="" />
               </div>
               <button>Join</button>
             </div>
             <div className="competition-card">
-              <h1>Title</h1>
+              <h1>CITD</h1>
               <div className="competition-logo">
-                <img src={showcaseLogo} alt="" />
+                <img src={logoCITD} alt="" />
               </div>
               <button>Join</button>
             </div>
             <div className="competition-card">
-              <h1>Title</h1>
+              <h1>IPSC</h1>
               <div className="competition-logo">
-                <img src={showcaseLogo} alt="" />
+                <img src={logoIPSC} alt="" />
               </div>
               <button>Join</button>
             </div>
             <div className="competition-card">
-              <h1>Title</h1>
+              <h1>CTF</h1>
               <div className="competition-logo">
-                <img src={showcaseLogo} alt="" />
+                <img src={logoCTF} alt="" />
               </div>
               <button>Join</button>
             </div>
@@ -78,7 +88,7 @@ class Home extends Component {
             <span>seminar</span>
           </div>
           <div className="seminar-header-logo">
-            <img src={showcaseLogo} alt="" />
+            <img src={logoSeminar} alt="" />
           </div>
           <div className="seminar-text">
             Ajang bagi para peminat IT untuk mendapatkan ilmu dari figur-figur yang memiliki pengaruh di bidang IT. Selain mendapatkan ilmu baru, kamu memiliki kesempatan untuk bertukar ide dan pikiran dengan figur-figur tersebut
@@ -90,10 +100,10 @@ class Home extends Component {
             <span>playground</span>
           </div>
           <div className="playground-header-logo">
-            <img src={showcaseLogo} alt="" />
+            <img src={logoPlayground} alt="" />
           </div>
           <div className="playground-text">
-            [GANTI PLAYGROUND]Ajang bagi para peminat IT untuk mendapatkan ilmu dari figur-figur yang memiliki pengaruh di bidang IT. Selain mendapatkan ilmu baru, kamu memiliki kesempatan untuk bertukar ide dan pikiran dengan figur-figur tersebut
+            Arena permainan bagi seluruh mahasiswa yang datang ke Pekan Ristek. Banyak mainan seru yang bisa kamu mainkan bersama teman-temanmu. Selain itu, ada berbagai hadiah yang bisa kamu dapatkan dari bermain di Playground
           </div>
         </div>
       </Body>
@@ -106,7 +116,7 @@ export default Home;
 const Body = styled.div`
   display: flex;
   display: -webkit-flex;
-  margin: 5rem 0 0 0;
+  margin: 5rem 0 10rem 0;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -122,6 +132,7 @@ const Body = styled.div`
     justify-content: space-around;
     align-items: center;
     border: solid 1rem;
+    // 
   }
   .header-image {
     width: 100%;
@@ -163,7 +174,7 @@ const Body = styled.div`
     }
   }
   .showcase-section {
-    margin: 5rem 0 2rem 0;
+    margin: 6.5rem 0 2rem 0;
     width: 100%;
     height: auto;
     position: relative;
@@ -187,7 +198,7 @@ const Body = styled.div`
     }
     .showcase-title {
       width: 100%;
-      height: 60vh;
+      height: inherit;
       position: absolute;
       display: flex;
       display: -webkit-flex;
@@ -210,42 +221,43 @@ const Body = styled.div`
     }
   }
   .competition-section {
-    margin: 5rem 0 5rem 0;
+    margin: 2rem 0 2rem 0;
     position: relative;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     width: 100%;
-    height: 28rem;
+    height: auto;
     .competition-title {
-      width: inherit;
-      heigth: inherit;
-      position: relative;
+      width: 100%;
+      height: auto;
+      position: absolute;
       display: flex;
       display: -webkit-flex;
       flex-direction: row;
       align-items: flex-start;
       span {
         font-size: 3.5rem;
+        padding-left: 3rem;
         text-transform: uppercase;
-        padding-left: 5rem;
       }
     }
     .competition-text {
       display: flex;
       display: -webkit-flex;
+      align-items: flex-end;
+      width: 90%;
+      padding: 5rem 0 0 20rem;
       position: relative;
-      width: 100%;
-      padding-left: 25rem;
-      margin: 2rem 0 2rem 0;
+      font-size: 1rem;
     }
     .competition-card-container {
       display: flex;
       display: -webkit-flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
       margin-top: 2rem;
-      height: 28rem;
+      height: 16rem;
       .competition-card {
         display: flex;
         display: -webkit-flex;
@@ -267,8 +279,18 @@ const Body = styled.div`
           display: flex;
           display: -webkit-flex;
           align-items: center;
+          justify-content: center;
           position: relative;
-          margin: 3rem 0 3rem 0;
+          margin: 2.5rem 0 2.5rem 0;
+          height: 6rem;
+          width: 6rem;
+          border-radius: 0.5rem;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+          -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          .ctf-logo {
+
+          }
           img {
             height: 5rem;
             width: 5rem;
@@ -283,12 +305,34 @@ const Body = styled.div`
           font-size: 1.2rem;
         }
       }
+      .competition-card::after {
+        .competition-logo {
+          position: absolute;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          z-index: -1;
+          opacity: 0;
+        }
+      }
+      .competition-card:hover {
+        .competition-logo {
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
+        }
+      }
+      .competition-card:hover::after {
+        .competition-logo {
+          opacity: 1;
+        }
+      }
     }
   }
   .seminar-section {
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 2rem 0;
     width: 100%;
-    height: 25vh;
+    height: auto;
     position: relative;
     display: flex;
     display: -webkit-flex;
@@ -303,7 +347,6 @@ const Body = styled.div`
       align-items: flex-start;
       justify-content: flex-end;
       z-index: -1;
-      padding-right: 15rem;
       img {
         height: 8rem;
         width: 8rem;
@@ -316,10 +359,11 @@ const Body = styled.div`
       position: absolute;
       display: flex;
       display: -webkit-flex;
-      flex-direction: flex-start;
-      padding: 1.2rem 0 0 0;
+      flex-direction: row;
+      align-items: flex-start;
       span {
         font-size: 3.5rem;
+        padding-left: 3rem;
         text-transform: uppercase;
       }
     }
@@ -334,7 +378,7 @@ const Body = styled.div`
     }
   }
   .playground-section {
-    margin: 5rem 0 5rem 0;
+    margin: 2rem 0 2rem 0;
     width: 100%;
     height: 35vh;
     position: relative;
@@ -344,6 +388,7 @@ const Body = styled.div`
     align-items: flex-start;
     .playground-header-logo {
       width: 100%;
+      padding: 0 0 0 4rem;
       height: inherit;
       position: absolute;
       display: flex;
@@ -359,14 +404,15 @@ const Body = styled.div`
     }
     .playground-title {
       width: 100%;
-      height: auto;
+      height: 60vh;
       position: absolute;
       display: flex;
       display: -webkit-flex;
-      flex-direction: flex-start;
-      padding: 1.2rem 0 0 0;
+      flex-direction: row;
+      align-items: flex-start;
       span {
         font-size: 3.5rem;
+        padding-left: 3rem;
         text-transform: uppercase;
       }
     }
@@ -374,11 +420,107 @@ const Body = styled.div`
       display: flex;
       display: -webkit-flex;
       align-items: flex-end;
-      justify-content: flex-start;
-      width: 100%;
-      padding: 6rem 0 0 20rem;
+      width: 90%;
+      padding: 5rem 0 0 20rem;
       position: relative;
       font-size: 1rem;
+    }
+  }
+  
+  @media screen and (max-width:767px) {
+    margin: auto;
+    .header-text {
+      align-items: center;
+      padding: 2rem 0 0 0;
+      span {
+        padding: 0;
+        font-size: 1.6rem;
+      }
+      .text {
+        width: 100%;
+        padding: 2rem 1rem 0 1rem;
+        margin: 0;
+        text-align: justify;
+        text-justify: inter-word;
+      }
+    }
+    .showcase-section {
+      margin: 6.5rem 0 0 0;
+      .showcase-header-logo {
+        img {
+          height: 7rem;
+          width: 7rem;
+        }
+      }
+      .showcase-title {
+        span {
+          font-size: 2.5rem;
+        }
+      }
+      .showcase-text {
+        width: 100%;
+        padding: 5rem 1rem 0 7rem;
+        text-align: justify;
+        text-justify: inter-word;
+      }
+    }
+    .competition-section {
+      
+      .competition-title {
+        span {
+          font-size: 2.3rem;
+        }
+      }
+      .competition-text {
+        width: 100%;
+        padding: 5rem 1rem 0 7rem;
+        text-align: justify;
+        text-justify: inter-word;
+      }
+      .competition-card-container {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        .competition-card {
+          width: 90%;
+          border-top: none;
+          margin: 0 0 1rem 0;
+        }
+      }
+    }
+    .seminar-section {
+      .seminar-header-logo {
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .seminar-title {
+        span {
+          font-size: 2.5rem;
+        }
+      }
+      .seminar-text {
+        width: 100%;
+        padding: 5rem 1rem 0 7rem;
+        text-align: justify;
+        text-justify: inter-word;
+      }
+    }
+    .playground-section {
+      margin: 2rem 0 10rem 0;
+      .playground-header-logo {
+        padding: 0;
+      }
+      .playground-title {
+        span {
+          font-size: 2.3rem;
+        }
+      }
+      .playground-text {
+        width: 100%;
+        padding: 5rem 1rem 0 7rem;
+        text-align: justify;
+        text-justify: inter-word;
+      }
     }
   }
 `;

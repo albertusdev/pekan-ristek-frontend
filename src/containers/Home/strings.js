@@ -1,0 +1,5 @@
+const textHeader = 'merupakan ajang tahunan yang diselenggarakan oleh Ristek Fasilkom UI, bertujuan untuk meningkatkan minat dan ketertarikan terhadap dunia IT. Tahun ini, Pekan Ristek membawakan tema "IT Strikes Back"';
+const textShowcase = 'Ajang bagi para exhibitor untuk menunjukkan karya-karya mereka, baik yang masih dalam tahap pengembangan ataupun yang sudah jadi. Karya-karya mereka merupakan karya-karya yang kreatif, inovatif, dan terkini';
+const textCompetition = 'Ajang bagi para pejuang IT untuk menunjukkan kemampuan mereka di bidang IT. Pekan Ristek 2017 kali ini menyelenggarakan 4 kompetisi, yaitu Code In The Dark, UI/UX, Internal Problem Solving Competition, dan Capture The Flag';
+const textSeminar = 'Ajang bagi para peminat IT untuk mendapatkan ilmu dari figur-figur yang memiliki pengaruh di bidang IT. Selain mendapatkan ilmu baru, kamu memiliki kesempatan untuk bertukar ide dan pikiran dengan figur-figur tersebut';
+const textPlayground = '';

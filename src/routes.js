@@ -31,7 +31,7 @@ const AUTHENTICATED_ROUTES = [
 ];
 
 const UNAUTHENTICATED_ROUTES = [
-  { path: '/', component: Login, exact: true },
+  { path: '/', component: Home, exact: true },
   { path: SIGNUP_PATH, component: Signup, exact: true },
   { path: LOGIN_PATH, component: Login },
 ];
