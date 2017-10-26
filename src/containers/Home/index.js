@@ -5,6 +5,7 @@ import squaresParticle from '../../assets/squares-particel.svg';
 import Footer from '../../components/Footer';
 import Navigation from '../../components/Navigation';
 import {LOGIN_PATH} from '../../common/routing';
+import Slider from './imgSlides';
 // IMPORT FROM ASSETS LOGO
 import logoIPSC from '../../assets/logo-ipsc.svg';
 import logoCTF from '../../assets/logo-ctf.svg';
@@ -16,6 +17,24 @@ import logoSeminar from '../../assets/logo-seminar.svg';
 import logoShowcase from '../../assets/logo-showcase.svg';
 import logoPekanRistek from '../../assets/logo-pekan-ristek.jpg';
 import logoRistek from '../../assets/logo-ristek.png';
+
+// DONNNNNNN!!!!!!!!!!!!!!!!!!!!!!!!
+// @TODO photo import dari assets terus biar gampang di passing kesini aja
+// @TODO tolong jangan lupa photo di compress pake photoshop
+const photoSC01 = null;
+const photoSC02 = null;
+const photoSC03 = null;
+const photoSC04 = null;
+
+const photoSeminar01 = null;
+const photoSeminar02 = null;
+const photoSeminar03 = null;
+const photoSeminar04 = null;
+
+const photoPG01 = null;
+const photoPG02 = null;
+const photoPG03 = null;
+const photoPG04 = null;
 
 class Home extends Component {
   render() {
@@ -34,17 +53,18 @@ class Home extends Component {
         </div>
         <div className="showcase-section">
           <div className="showcase-title">
-              <span>Showcase</span>
-            </div>
+            <span>Showcase</span>
+          </div>
           <div className="showcase-header-logo">
-          {/* @TODO change to svg and fix the dimension */}
             <img src={logoShowcase} />
           </div>
           <div className="showcase-text">
             Ajang bagi para exhibitor untuk menunjukkan karya-karya mereka, baik yang masih dalam tahap pengembangan ataupun yang sudah jadi. Karya-karya mereka merupakan karya-karya yang kreatif, inovatif, dan terkini.
           </div>
         </div>
-        <div className="photo-slider">IMAGE HERE</div>
+        <div className="photo-slider">
+          <Slider useImages="true" slides={[photoSC01, photoSC02, photoSC03, photoSC04]} />
+        </div>
         <div className="competition-section">
           <div className="competition-title">
             <span>competition</span>
@@ -94,7 +114,10 @@ class Home extends Component {
             Ajang bagi para peminat IT untuk mendapatkan ilmu dari figur-figur yang memiliki pengaruh di bidang IT. Selain mendapatkan ilmu baru, kamu memiliki kesempatan untuk bertukar ide dan pikiran dengan figur-figur tersebut
           </div>
         </div>
-        <div className="photo-slider">IMAGE HERE</div>
+        <div className="photo-slider">
+          <Slider useImages="true"
+            slides={[photoSeminar01, photoSeminar02, photoSeminar03, photoSeminar04]} />
+        </div>
         <div className="playground-section">
           <div className="playground-title">
             <span>playground</span>
@@ -106,6 +129,9 @@ class Home extends Component {
             Arena permainan bagi seluruh mahasiswa yang datang ke Pekan Ristek. Banyak mainan seru yang bisa kamu mainkan bersama teman-temanmu. Selain itu, ada berbagai hadiah yang bisa kamu dapatkan dari bermain di Playground
           </div>
         </div>
+        <div className="photo-slider">
+          <Slider useImages="true" slides={[photoPG01, photoPG02, photoPG03, photoPG04]} />
+        </div>
       </Body>
     );
   }
@@ -116,7 +142,7 @@ export default Home;
 const Body = styled.div`
   display: flex;
   display: -webkit-flex;
-  margin: 5rem 0 10rem 0;
+  margin: 5rem 0 5rem 0;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -124,15 +150,13 @@ const Body = styled.div`
   font-family: ${props => props.theme.font.jaapokki};
   .photo-slider {
     width: 100%;
-    height: 50vh;
+    height: auto;
     margin: 2rem 0 2rem 0;
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border: solid 1rem;
-    // 
   }
   .header-image {
     width: 100%;
@@ -146,6 +170,7 @@ const Body = styled.div`
       display: -webkit-flex;
       justify-content: center;
       align-items: center;
+      opacity: 0.75;
       img {
         height: 25rem;
         width: 25rem;
@@ -168,7 +193,7 @@ const Body = styled.div`
     }
     .text {
       width: 35%;
-      font-size: 1rem;
+      font-size: 1.1rem;
       padding: 0 3.5rem 0 2rem;
       margin: 4rem 4.5rem 0 0;
     }
@@ -189,8 +214,10 @@ const Body = styled.div`
       display: flex;
       display: -webkit-flex;
       align-items: flex-start;
+      opacity: 0.35;
       z-index: -1;
       img {
+        filter: blur(1px);
         height: 10rem;
         width: 10rem;
         object-fit: contain;
@@ -217,7 +244,7 @@ const Body = styled.div`
       width: 90%;
       padding: 5rem 0 0 20rem;
       position: relative;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
   .competition-section {
@@ -249,7 +276,7 @@ const Body = styled.div`
       width: 90%;
       padding: 5rem 0 0 20rem;
       position: relative;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
     .competition-card-container {
       display: flex;
@@ -287,6 +314,8 @@ const Body = styled.div`
           border-radius: 0.5rem;
           box-shadow: 0 1px 2px rgba(0,0,0,0.15);
           -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          -moz-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          -ms-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
           transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
           .ctf-logo {
 
@@ -310,6 +339,8 @@ const Body = styled.div`
           position: absolute;
           box-shadow: 0 2px 8px rgba(0,0,0,0.3);
           -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          -moz-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+          -ms-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
           transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
           z-index: -1;
           opacity: 0;
@@ -319,6 +350,8 @@ const Body = styled.div`
         .competition-logo {
           box-shadow: 0 2px 8px rgba(0,0,0,0.3);
           -webkit-transform: scale(1.25, 1.25);
+          -moz-transform: scale(1.25, 1.25);
+          -ms-transform: scale(1.25, 1.25);
           transform: scale(1.25, 1.25);
         }
       }
@@ -346,10 +379,12 @@ const Body = styled.div`
       display: -webkit-flex;
       align-items: flex-start;
       justify-content: flex-end;
+      opacity: 0.35;
       z-index: -1;
       img {
-        height: 8rem;
-        width: 8rem;
+        filter: blur(1px);
+        height: 10rem;
+        width: 10rem;
         object-fit: contain;
       }
     }
@@ -374,13 +409,13 @@ const Body = styled.div`
       width: 90%;
       padding: 5rem 0 0 20rem;
       position: relative;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
   .playground-section {
     margin: 2rem 0 2rem 0;
     width: 100%;
-    height: 35vh;
+    height: auto;
     position: relative;
     display: flex;
     display: -webkit-flex;
@@ -393,10 +428,12 @@ const Body = styled.div`
       position: absolute;
       display: flex;
       display: -webkit-flex;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: flex-start;
+      opacity: 0.35;
       z-index: -1;
       img {
+        filter: blur(1px);
         height: 10rem;
         width: 10rem;
         object-fit: contain;
@@ -404,7 +441,7 @@ const Body = styled.div`
     }
     .playground-title {
       width: 100%;
-      height: 60vh;
+      height: auto;
       position: absolute;
       display: flex;
       display: -webkit-flex;
@@ -423,7 +460,7 @@ const Body = styled.div`
       width: 90%;
       padding: 5rem 0 0 20rem;
       position: relative;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
   
@@ -465,7 +502,7 @@ const Body = styled.div`
       }
     }
     .competition-section {
-      
+      margin: 2rem 0 0rem 0;
       .competition-title {
         span {
           font-size: 2.3rem;
@@ -489,6 +526,7 @@ const Body = styled.div`
       }
     }
     .seminar-section {
+      margin: 2rem 0 0rem 0;
       .seminar-header-logo {
         align-items: flex-start;
         justify-content: flex-start;
@@ -506,7 +544,7 @@ const Body = styled.div`
       }
     }
     .playground-section {
-      margin: 2rem 0 10rem 0;
+      margin: 2rem 0 0 0;
       .playground-header-logo {
         padding: 0;
       }
