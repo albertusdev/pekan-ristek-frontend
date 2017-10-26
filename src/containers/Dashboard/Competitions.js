@@ -18,9 +18,9 @@ import logoUIUX from '../../assets/logo-uiux.png';
 
 const IPSC_RULEBOOK_URL = 'https://docs.google.com/document/d/1OqYcydn7CdQKQ-SLE1ERgwaYDiPehKwKYbCKi97f6qo/edit?usp=sharing';
 const CITD_RULEBOOK_URL = 'https://docs.google.com/document/d/1W-P7aN9KcdY4koj-XkOV9vU96rQ_dTveWBopSlP2-ko/edit?usp=sharing';
-const UIUX_RULEBOOK_URL = 'https://docs.google.com/document/d/1OqYcydn7CdQKQ-SLE1ERgwaYDiPehKwKYbCKi97f6qo/edit?usp=sharing';
-
+const UIUX_RULEBOOK_URL = 'https://docs.google.com/document/d/1PFiq68XsSw3i0wMXQY-QQrld52v2sHED36dRZwd3QLw/edit?usp=sharing';
 const CTF_RULEBOOK_URL = '';
+
 @connect(
   state => ({
     auth: state.auth,

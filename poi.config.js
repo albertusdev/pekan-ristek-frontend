@@ -12,8 +12,5 @@ module.exports = (options, req) => ({
   env: {
     NODE_ENV: process.env.NODE_ENV || 'development',
   },
-  output: {
-    publicPath: 'http://localhost:8080/yakin',
-  },
-  port: 4000,
+  port: 4004,
 });

@@ -32,11 +32,7 @@ const AUTHENTICATED_ROUTES = [
 ];
 
 const UNAUTHENTICATED_ROUTES = [
-<<<<<<< 16006245c8a49e30322ba49e90158172e2aa7f55
-  { path: '/', component: Home, exact: true },
-=======
-  { path: BASE_URL, component: Login, exact: true },
->>>>>>> Fix deployment final
+  { path: BASE_URL, component: Home, exact: true },
   { path: SIGNUP_PATH, component: Signup, exact: true },
   { path: LOGIN_PATH, component: Login },
 ];

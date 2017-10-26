@@ -86,9 +86,9 @@ class Login extends Component {
     const { username, password, isUIStudent } = this.state;
     return (
       <Body>
-        <Card width="50vw" mobileWidth="100%">
+        <Card width="50vw" mobileWidth="100vw">
           <div className="right">
-            <PageTitle>Sign in</PageTitle>
+            <PageTitle>Login</PageTitle>
             <CenterForm isActive={!isUIStudent}>
               <InputIcon
                 type="tel"
@@ -135,6 +135,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   color: ${props => props.theme.color.black};
   display: flex;
+  font-family: ${props => props.theme.font.jaapokki};
   margin: 1rem 0;
   padding: 1rem 0;
   width: 50%;
@@ -144,6 +145,9 @@ const Button = styled.button`
   justify-content: center;
   &:hover {
     cursor: pointer;
+  }
+  ${media('mobile')} {
+    width: 100%;
   }
 `;
 
@@ -169,9 +173,6 @@ const Body = styled.div`
       margin: 1rem;
     }
     ${media('mobile')} {
-      .left {
-        display: none;
-      }
       .right: {
         width: 100%;
       }

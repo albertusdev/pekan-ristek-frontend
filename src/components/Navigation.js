@@ -53,7 +53,7 @@ export default class Navigation extends React.Component {
           {isMenuOpen &&
             <MobileMenu>
               <div className="flex">
-                <button className="logo" onClick={() => this.props.history.push(BASE_URL)}>
+                <button className="logo" onClick={() => this.redirectTo(BASE_URL)}>
                   <img src={squares} alt="logo-pekan-ristek" />
                   <div>Pekan Ristek</div>
                 </button>
@@ -62,7 +62,7 @@ export default class Navigation extends React.Component {
                 </button>
               </div>
               <MobileNavigation>
-                <button onClick={() => this.redirectTo('/')}>Home</button>
+                <button onClick={() => this.redirectTo(BASE_URL)}>Home</button>
                 <button onClick={() => this.redirectTo(DASHBOARD_PATH)}>Dashboard</button>
                 {!login &&
                   <button onClick={() => this.redirectTo(LOGIN_PATH)}>Login / Signup</button>}
@@ -71,16 +71,15 @@ export default class Navigation extends React.Component {
             </MobileMenu>}
         </MobileContainer>
         <DesktopContainer>
-          <button className="logo" onClick={() => this.props.history.push(BASE_URL)}>
+          <button className="logo" onClick={() => this.redirectTo(BASE_URL)}>
             <img src={squares} alt="logo-pekan-ristek" />
             <div>Pekan Ristek</div>
           </button>
           <div className="navigation">
-            <button onClick={() => this.props.history.push(BASE_URL)}>Home</button>
-            <button onClick={() => this.props.history.push(DASHBOARD_PATH)}>Dashboard</button>
-            {!login &&
-              <button onClick={() => this.props.history.push(LOGIN_PATH)}>Login / Signup</button>}
-            {login && <button onClick={() => this.props.history.push(LOGOUT_PATH)}>Logout</button>}
+            <button onClick={() => this.redirectTo(BASE_URL)}>Home</button>
+            <button onClick={() => this.redirectTo(DASHBOARD_PATH)}>Dashboard</button>
+            {!login && <button onClick={() => this.redirectTo(LOGIN_PATH)}>Login / Signup</button>}
+            {login && <button onClick={() => this.redirectTo(LOGOUT_PATH)}>Logout</button>}
           </div>
         </DesktopContainer>
       </Container>

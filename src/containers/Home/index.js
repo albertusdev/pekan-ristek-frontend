@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import squares from '../../assets/squares.png';
+import PropTypes from 'prop-types';
 import squaresParticle from '../../assets/squares-particel.svg';
-import Footer from '../../components/Footer';
-import Navigation from '../../components/Navigation';
-import {LOGIN_PATH} from '../../common/routing';
+import { LOGIN_PATH } from '../../common/routing';
 import Slider from './imgSlides';
 // IMPORT FROM ASSETS LOGO
 import logoIPSC from '../../assets/logo-ipsc.svg';
 import logoCTF from '../../assets/logo-ctf.svg';
 import logoUIUX from '../../assets/logo-uiux.svg';
 import logoCITD from '../../assets/logo-citd.svg';
-import logoMainEvent from '../../assets/logo-main-event.svg';
 import logoPlayground from '../../assets/logo-playground.svg';
 import logoSeminar from '../../assets/logo-seminar.svg';
 import logoShowcase from '../../assets/logo-showcase.svg';
-import logoPekanRistek from '../../assets/logo-pekan-ristek.jpg';
-import logoRistek from '../../assets/logo-ristek.png';
 // // IMPORT PHOTO
 // // Showcase
 // import photoSC01 from '../../assets/photos/P1.JPG';
@@ -47,8 +42,11 @@ const photoSeminar02 = null;
 const photoSeminar03 = null;
 const photoSeminar04 = null;
 
-
 class Home extends Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  };
+
   render() {
     return (
       <Body>
@@ -90,28 +88,28 @@ class Home extends Component {
               <div className="competition-logo">
                 <img src={logoUIUX} alt="" />
               </div>
-              <button>Join</button>
+              <button onClick={() => this.props.history.push(LOGIN_PATH)}>Join</button>
             </div>
             <div className="competition-card">
               <h1>CITD</h1>
               <div className="competition-logo">
                 <img src={logoCITD} alt="" />
               </div>
-              <button>Join</button>
+              <button onClick={() => this.props.history.push(LOGIN_PATH)}>Join</button>
             </div>
             <div className="competition-card">
               <h1>IPSC</h1>
               <div className="competition-logo">
                 <img src={logoIPSC} alt="" />
               </div>
-              <button>Join</button>
+              <button onClick={() => this.props.history.push(LOGIN_PATH)}>Join</button>
             </div>
             <div className="competition-card">
               <h1>CTF</h1>
               <div className="competition-logo">
                 <img src={logoCTF} alt="" />
               </div>
-              <button>Join</button>
+              <button onClick={() => this.props.history.push(LOGIN_PATH)}>Join</button>
             </div>
           </div>
         </div>
