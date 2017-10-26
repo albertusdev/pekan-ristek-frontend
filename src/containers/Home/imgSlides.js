@@ -79,7 +79,6 @@ const ImgSlider = styled.div`
 const Page = styled.ul`
   text-align: center;
   top: -50px;
-  z-index: 1000;
   position: relative;
   padding: 0;
   li {

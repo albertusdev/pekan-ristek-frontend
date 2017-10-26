@@ -169,6 +169,7 @@ const Body = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    display: none;
   }
   .header-image {
     width: 100%;
