@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Glyphicon } from 'react-bootstrap';
 import squares from '../assets/squares.png';
 import theme, { media } from '../common/theme';
-import { DASHBOARD_PATH, LOGIN_PATH, LOGOUT_PATH } from '../common/routing';
+import { BASE_URL, DASHBOARD_PATH, LOGIN_PATH, LOGOUT_PATH } from '../common/routing';
 import closeButton from '../assets/close-button.svg';
 
 const mediaQueryListener = window.matchMedia(`max-width: ${theme.breakpoint.mobile}`);
@@ -44,7 +44,7 @@ export default class Navigation extends React.Component {
         <MobileContainer>
           {!isMenuOpen &&
             <div className="flex">
-              <button className="logo" onClick={() => this.props.history.push('/')}>
+              <button className="logo" onClick={() => this.props.history.push(BASE_URL)}>
                 <img src={squares} alt="logo-pekan-ristek" />
                 <div>Pekan Ristek</div>
               </button>
@@ -53,7 +53,7 @@ export default class Navigation extends React.Component {
           {isMenuOpen &&
             <MobileMenu>
               <div className="flex">
-                <button className="logo" onClick={() => this.props.history.push('/')}>
+                <button className="logo" onClick={() => this.props.history.push(BASE_URL)}>
                   <img src={squares} alt="logo-pekan-ristek" />
                   <div>Pekan Ristek</div>
                 </button>
@@ -71,12 +71,12 @@ export default class Navigation extends React.Component {
             </MobileMenu>}
         </MobileContainer>
         <DesktopContainer>
-          <button className="logo" onClick={() => this.props.history.push('/')}>
+          <button className="logo" onClick={() => this.props.history.push(BASE_URL)}>
             <img src={squares} alt="logo-pekan-ristek" />
             <div>Pekan Ristek</div>
           </button>
           <div className="navigation">
-            <button onClick={() => this.props.history.push('/')}>Home</button>
+            <button onClick={() => this.props.history.push(BASE_URL)}>Home</button>
             <button onClick={() => this.props.history.push(DASHBOARD_PATH)}>Dashboard</button>
             {!login &&
               <button onClick={() => this.props.history.push(LOGIN_PATH)}>Login / Signup</button>}

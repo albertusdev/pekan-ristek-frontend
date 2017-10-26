@@ -12,6 +12,7 @@ import NotFound from './components/NotFound';
 import AuthenticatedRoute from './common/auth';
 import Navigation from './components/Navigation';
 import {
+  BASE_URL,
   DASHBOARD_PATH,
   DASHBOARD_EDIT_PASSWORD_PATH,
   DASHBOARD_EDIT_PROFILE_PATH,
@@ -31,7 +32,11 @@ const AUTHENTICATED_ROUTES = [
 ];
 
 const UNAUTHENTICATED_ROUTES = [
+<<<<<<< 16006245c8a49e30322ba49e90158172e2aa7f55
   { path: '/', component: Home, exact: true },
+=======
+  { path: BASE_URL, component: Login, exact: true },
+>>>>>>> Fix deployment final
   { path: SIGNUP_PATH, component: Signup, exact: true },
   { path: LOGIN_PATH, component: Login },
 ];

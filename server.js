@@ -20,7 +20,7 @@ const accessLogStream = rfs('access.log', {
 app.use(favicon(path.join(distDirectory, 'favicon.ico')));
 app.use(morgan('combined', { stream: accessLogStream }));
 
-app.use(express.static('dist'));
+app.use('/pekan-ristek', express.static('dist'));
 app.use('*', function(req, res, next) {
   if (/\/[^.]*$/.test(req.url)) {
     res.sendFile(path.join(distDirectory, 'index.html'));

@@ -53,7 +53,6 @@ class Login extends Component {
     const receiveSSOLoginCredentials = e => {
       const allowedOrigin = 'http://ristek.cs.ui.ac.id';
       const allowedLocalOrigin = 'http://localhost:8000';
-      console.log(e.origin);
       if (e.origin === allowedOrigin || e.origin === allowedLocalOrigin) {
         this.props.setAuth(e.data);
         this.props.history.push(DASHBOARD_PATH);
