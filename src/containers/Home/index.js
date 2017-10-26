@@ -17,10 +17,26 @@ import logoSeminar from '../../assets/logo-seminar.svg';
 import logoShowcase from '../../assets/logo-showcase.svg';
 import logoPekanRistek from '../../assets/logo-pekan-ristek.jpg';
 import logoRistek from '../../assets/logo-ristek.png';
+// // IMPORT PHOTO
+// // Showcase
+// import photoSC01 from '../../assets/photos/P1.JPG';
+// import photoSC02 from '../../assets/photos/P16.JPG';
+// import photoSC03 from '../../assets/photos/P8.JPG';
+// import photoSC04 from '../../assets/photos/P6.JPG';
+// // seminar
+// import photoSeminar01 from '../../assets/photos/P17.JPG';
+// import photoSeminar02 from '../../assets/photos/P7.JPG';
+// import photoSeminar03 from '../../assets/photos/P3.JPG';
+// import photoSeminar04 from '../../assets/photos/P2.JPG';
+// // playground
+// import photoPG01 from '../../assets/photos/P9.JPG';
+// import photoPG02 from '../../assets/photos/P5.JPG';
 
-// DONNNNNNN!!!!!!!!!!!!!!!!!!!!!!!!
-// @TODO photo import dari assets terus biar gampang di passing kesini aja
-// @TODO tolong jangan lupa photo di compress pake photoshop
+const photoPG01 = null;
+const photoPG02 = null;
+const photoPG03 = null;
+const photoPG04 = null;
+
 const photoSC01 = null;
 const photoSC02 = null;
 const photoSC03 = null;
@@ -31,10 +47,6 @@ const photoSeminar02 = null;
 const photoSeminar03 = null;
 const photoSeminar04 = null;
 
-const photoPG01 = null;
-const photoPG02 = null;
-const photoPG03 = null;
-const photoPG04 = null;
 
 class Home extends Component {
   render() {
