@@ -2,10 +2,10 @@ const LOCAL_URL = 'http://localhost:4000/pekan-ristek/';
 const PRODUCTION_URL = 'http://ristek.cs.ui.ac.id/pekan-ristek/';
 
 module.exports = (options, req) => {
-  if (process.env.NODE === 'production') {
+  if (!process.env.NODE_ENV) {
     return {
       webpack(config) {
-        config.output.publicPath = PRODUCTION_URL;
+        config.output.publicPath = LOCAL_URL;
         return config;
       },
       html: {
