@@ -8,7 +8,7 @@ import Card from '../../components/Card';
 import InputIcon from '../../components/InputIcon';
 import { signup } from '../../redux_modules/auth';
 import { media } from '../../common/theme';
-import { SIGNUP_PATH, DASHBOARD_PATH } from '../../common/routing';
+import { LOGIN_PATH, DASHBOARD_PATH } from '../../common/routing';
 import LoadingButtonComponent from '../../components/LoadingButtonComponent';
 
 @connect(
@@ -95,94 +95,82 @@ class Signup extends Component {
     const { loading } = this.props.auth;
     return (
       <Body>
-        <Card width="80%" mobileWidth="100%">
-          <div className="left">
-            <img src={squares} className="squares" alt="square logo" />
-            <PekanRistek>Pekan Ristek</PekanRistek>
-          </div>
-          <div className="right">
-            <PageTitle>Sign Up</PageTitle>
-            <CenterForm>
-              <InputIcon
-                name="firstName"
-                glyph="text-color"
-                label="first Name"
-                value={firstName}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                name="lastName"
-                glyph="text-color"
-                label="Last Name"
-                value={lastName}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                type="tel"
-                name="phone"
-                glyph="phone"
-                label="Phone"
-                placeHolder="phone"
-                value={phone}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                name="institution"
-                glyph="book"
-                label="Institution"
-                value={institution}
-                placeHolder="institution"
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                type="email"
-                name="email"
-                glyph="envelope"
-                label="email"
-                value={email}
-                plcaeHolder="email"
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                name="username"
-                glyph="user"
-                label="Username"
-                value={username}
-                placeHolder="username"
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                type="password"
-                name="password"
-                glyph="lock"
-                label="Password"
-                value={password}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                type="password"
-                name="rePassword"
-                glyph="lock"
-                label="Re-enter Password"
-                value={rePassword}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.generateLastValidationState()}
-                help={this.generateHelpMessage()}
-              />
-              <Button primary onClick={e => this.signup(e)} disabled={loading}>
-                {!loading && 'Sign Up'}
-                {loading && <LoadingButtonComponent />}
-              </Button>
-            </CenterForm>
-          </div>
-        </Card>
+        <img
+          alt="squares"
+          src={squares}
+          onClick={() => this.props.history.push(LOGIN_PATH)}
+        />
+        <CenterForm>
+          <InputIcon
+            label="first Name"
+            name="firstName"
+            onChange={e => this.onInputChange(e)}
+            validationState={this.props.auth.error ? 'error' : null}
+            value={firstName}
+          />
+          <InputIcon
+            label="Last Name"
+            name="lastName"
+            onChange={e => this.onInputChange(e)}
+            validationState={this.props.auth.error ? 'error' : null}
+            value={lastName}
+          />
+          <InputIcon
+            label="Phone"
+            name="phone"
+            onChange={e => this.onInputChange(e)}
+            placeHolder="phone"
+            type="tel"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={phone}
+          />
+          <InputIcon
+            label="Institution"
+            name="institution"
+            onChange={e => this.onInputChange(e)}
+            placeHolder="institution"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={institution}
+          />
+          <InputIcon
+            label="email"
+            name="email"
+            onChange={e => this.onInputChange(e)}
+            placeHolder="email"
+            type="email"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={email}
+          />
+          <InputIcon
+            label="Username"
+            name="username"
+            onChange={e => this.onInputChange(e)}
+            placeHolder="username"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={username}
+          />
+          <InputIcon
+            label="Password"
+            name="password"
+            onChange={e => this.onInputChange(e)}
+            type="password"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={password}
+          />
+          <InputIcon
+            help={this.generateHelpMessage()}
+            label="Re-enter Password"
+            name="rePassword"
+            onChange={e => this.onInputChange(e)}
+            type="password"
+            validationState={this.generateLastValidationState()}
+            value={rePassword}
+          />
+          <Button primary onClick={e => this.signup(e)} disabled={loading}>
+            {!loading && 'Sign Up'}
+            {loading && <LoadingButtonComponent />}
+          </Button>
+        </CenterForm>
       </Body>
     );
   }
@@ -191,34 +179,25 @@ class Signup extends Component {
 export default Signup;
 
 const Body = styled.div`
-  display: flex;
-  align-self: center;
-  justify-content: center;
   align-items: center;
+  align-self: center;
   color: ${props => props.theme.color.black};
-  ${Card} {
-    display: flex;
-    justify-content: center;
-    .left,
-    .right {
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-      align-items: center;
-      justify-content: center;
-      img {
-        height: 4rem;
-      }
-      margin: 1rem;
-    }
-    ${media('mobile')} {
-      .left {
-        display: none;
-      }
-      .right: {
-        width: 100%;
-      }
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 0.25rem black;
+  border-radius: 0.25rem;
+  padding: 2rem 4rem;
+  position: relative;
+  margin-top: 2rem;
+  img {
+    background-color: ${props => props.theme.color.white};
+    cursor: pointer;
+    object-fit: scale-down;
+    position: absolute;
+    top: -2rem;
+    width: 3rem;
+    z-index: 1;
   }
 `;
 
@@ -228,6 +207,7 @@ const Button = styled.button`
   border-radius: 0.5rem;
   color: ${props => props.theme.color.black};
   display: flex;
+  font-family: ${props => props.theme.font.jaapokki};
   margin: 1rem 0;
   padding: 1rem 0;
   width: 50%;
@@ -250,22 +230,5 @@ const CenterForm = styled(Form)`
   .form-group {
     margin: 0;
     padding: 0;
-  }
-`;
-
-const PageTitle = styled.div`
-  color: ${props => props.theme.color.yellowPR};
-  font-family: ${props => props.theme.font.jaapokki};
-  font-size: 2.5rem;
-`;
-
-const PekanRistek = styled.div`
-  display: flex;
-  align-items: center;
-  font-family: ${props => props.theme.font.pekanRistek};
-  font-size: 2.5rem;
-  img {
-    height: 3rem;
-    margin-right: 1rem;
   }
 `;

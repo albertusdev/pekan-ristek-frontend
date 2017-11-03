@@ -14,6 +14,7 @@ import Navigation from './components/Navigation';
 import {
   BASE_URL,
   DASHBOARD_PATH,
+  COMPLEX_DASHBOARD_PATH,
   DASHBOARD_EDIT_PASSWORD_PATH,
   DASHBOARD_EDIT_PROFILE_PATH,
   LOGIN_PATH,
@@ -27,6 +28,7 @@ import { media } from './common/theme';
 
 const AUTHENTICATED_ROUTES = [
   { path: DASHBOARD_PATH, component: Dashboard, exact: true },
+  { path: COMPLEX_DASHBOARD_PATH, component: Dashboard, exact: true },
   { path: DASHBOARD_EDIT_PROFILE_PATH, component: DashboardEditProfile },
   { path: DASHBOARD_EDIT_PASSWORD_PATH, component: DashboardEditPassword },
 ];

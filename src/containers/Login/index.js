@@ -11,7 +11,7 @@ import Footer from '../../components/Footer';
 import { ssoLOGIN } from '../../common/apiUrl';
 import { login, setAuth } from '../../redux_modules/auth';
 import { media } from '../../common/theme';
-import { SIGNUP_PATH, DASHBOARD_PATH } from '../../common/routing';
+import { LOGIN_PATH, SIGNUP_PATH, DASHBOARD_PATH } from '../../common/routing';
 import LoadingButtonComponent from '../../components/LoadingButtonComponent';
 
 @connect(
@@ -37,13 +37,15 @@ class Login extends Component {
     }, 100);
   }
 
+  static INITIAL_STATE = {
+    username: '',
+    password: '',
+    isUIStudent: true,
+  };
+
   constructor() {
     super();
-    this.state = {
-      username: '',
-      password: '',
-      isUIStudent: true,
-    };
+    this.state = { ...Login.INITIAL_STATE };
   }
 
   componentDidMount() {
@@ -86,42 +88,41 @@ class Login extends Component {
     const { username, password, isUIStudent } = this.state;
     return (
       <Body>
-        <Card width="50vw" mobileWidth="100vw">
-          <div className="right">
-            <PageTitle>Login</PageTitle>
-            <CenterForm isActive={!isUIStudent}>
-              <InputIcon
-                type="tel"
-                name="username"
-                glyph="user"
-                placeHolder="username"
-                value={username}
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-              />
-              <InputIcon
-                type="password"
-                name="password"
-                glyph="lock"
-                value={password}
-                placeHolder="password"
-                onChange={e => this.onInputChange(e)}
-                validationState={this.props.auth.error ? 'error' : null}
-                help={this.props.auth.error ? 'Username atau password salah' : null}
-              />
-              <Button disabled={this.props.auth.loading} onClick={e => this.login(e)}>
-                {!this.props.auth.loading && 'Sign in'}
-                {this.props.auth.loading && <LoadingButtonComponent>Loading</LoadingButtonComponent>}
-              </Button>
-            </CenterForm>
-            <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
-            <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
-              {/*isUIStudent && <span>Not an UI student? Sign in manually.</span>*/}
-              {/*!isUIStudent &&
-                <span>Doesn't have account yet? Sign up.</span>*/}
-            </EnforceSSOToggler>
-          </div>
-        </Card>
+        <img
+          alt="squares"
+          src={squares}
+          onClick={() => this.setState({ ...Login.INITIAL_STATE })}
+        />
+        <CenterForm isActive={!isUIStudent}>
+          <InputIcon
+            type="tel"
+            label="Username"
+            name="username"
+            placeHolder="username"
+            value={username}
+            onChange={e => this.onInputChange(e)}
+            validationState={this.props.auth.error ? 'error' : null}
+          />
+          <InputIcon
+            help={this.props.auth.error ? 'Username atau password salah' : null}
+            label="Password"
+            name="password"
+            onChange={e => this.onInputChange(e)}
+            placeHolder="password"
+            type="password"
+            validationState={this.props.auth.error ? 'error' : null}
+            value={password}
+          />
+          <Button disabled={this.props.auth.loading} onClick={e => this.login(e)}>
+            {!this.props.auth.loading && 'Sign in'}
+            {this.props.auth.loading && <LoadingButtonComponent>Loading</LoadingButtonComponent>}
+          </Button>
+        </CenterForm>
+        <ButtonSSO onClick={() => Login.openLoginSSO()} isActive={isUIStudent} />
+        <EnforceSSOToggler onClick={() => this.toggleUIStudent()}>
+          {isUIStudent && <span>Not a student? manually sign in here.</span>}
+          {!isUIStudent && <span>{`Doesn't have account yet? Sign up.`}</span>}
+        </EnforceSSOToggler>
       </Body>
     );
   }
@@ -152,31 +153,25 @@ const Button = styled.button`
 `;
 
 const Body = styled.div`
-  display: flex;
-  align-self: center;
-  justify-content: center;
   align-items: center;
+  align-self: center;
   color: ${props => props.theme.color.black};
-  ${Card} {
-    display: flex;
-    justify-content: center;
-    .left,
-    .right {
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-      align-items: center;
-      justify-content: center;
-      img {
-        height: 4rem;
-      }
-      margin: 1rem;
-    }
-    ${media('mobile')} {
-      .right: {
-        width: 100%;
-      }
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 0.25rem black;
+  border-radius: 0.25rem;
+  padding: 2rem 4rem;
+  position: relative;
+  margin-top: 2rem;
+  img {
+    position: absolute;
+    top: -2rem;
+    width: 3rem;
+    object-fit: scale-down;
+    background-color: ${props => props.theme.color.white};
+    z-index: 1;
+    cursor: pointer;
   }
 `;
 const CenterForm = styled(({ isActive, ...props }) => <Form {...props} />)`
@@ -200,21 +195,4 @@ const EnforceSSOToggler = styled.button`
     outline: none;
   }
   font-family: ${props => props.theme.font.jaapokki};
-`;
-
-const PageTitle = styled.div`
-  color: ${props => props.theme.color.yellowPR};
-  font-family: ${props => props.theme.font.jaapokki};
-  font-size: 2.5rem;
-`;
-
-const PekanRistek = styled.div`
-  display: flex;
-  align-items: center;
-  font-family: ${props => props.theme.font.pekanRistek};
-  font-size: 2.5rem;
-  img {
-    height: 3rem;
-    margin-right: 1rem;
-  }
 `;

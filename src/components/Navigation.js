@@ -99,7 +99,7 @@ const Container = styled.div`
   align-items: center;
   font-family: ${props => props.theme.font.helvetica};
   font-weight: bold;
-  z-index: 1;
+  z-index: 2;
   background-color: ${props => props.theme.color.white};
   .logo {
     display: flex;

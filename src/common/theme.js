@@ -5,6 +5,7 @@ const theme = {
     mobile: '48rem',
   },
   color: {
+    blue: '#75DDDD',
     black: '#1E2019',
     blackTransparent: opacity => `rgba(0, 0, 0, ${opacity})`,
     gray: '#585B56',
@@ -13,6 +14,7 @@ const theme = {
     yellowPR: '#F4D35E', // yellow Pekan Ristek
     yellowUI: '#FED304', // yellow Universitas Indonesia
     pink: '#E88873',
+    lightGray: '#F0F2EF',
   },
   font: {
     helvetica: 'Helvetica',
@@ -30,7 +32,7 @@ const theme = {
     },
     logo: {
       small: '1.5rem',
-      medium: '2rem',
+      medium: '1.75rem',
       large: '3rem',
     },
   },

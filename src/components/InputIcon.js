@@ -28,26 +28,17 @@ const Label = styled(ControlLabel)`
 
 function InputIcon(props) {
   return (
-    <StyledFormGroup validationState={props.validationState} horizontal>
-      <Row>
-        <Col componentClass={Label} sm={5}>
-          {props.label}
-        </Col>
-        <Col sm={7}>
-          <FormControl
-            {...props.name && { name: props.name }}
-            {...props}
-            type={props.type}
-            onChange={props.onChange}
-            placeholder={props.placeholder}
-            value={props.value}
-          />
-        </Col>
-      </Row>
-      {!!props.help &&
-        <HelpBlock>
-          {props.help}
-        </HelpBlock>}
+    <StyledFormGroup validationState={props.validationState}>
+      <Label>{props.label}</Label>
+      <FormControl
+        {...props.name && { name: props.name }}
+        {...props}
+        type={props.type}
+        onChange={props.onChange}
+        placeholder={props.placeholder}
+        value={props.value}
+      />
+      {!!props.help && <HelpBlock>{props.help}</HelpBlock>}
     </StyledFormGroup>
   );
 }

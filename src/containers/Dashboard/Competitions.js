@@ -44,24 +44,28 @@ export default class Competitions extends Component {
       title: 'Internal Problem Solving Competition',
       logo: logoIPSC,
       rulebookURL: IPSC_RULEBOOK_URL,
+      date: '8 November 2017',
     },
     CTF: {
       code: 'ctf',
       title: 'Capture the Flag with Dewaweb',
       logo: logoCTF,
       rulebookURL: CTF_RULEBOOK_URL,
+      date: '9 November 2017',
     },
     CITD: {
       code: 'citd',
       title: 'Code in the Dark',
       logo: logoCITD,
       rulebookURL: CITD_RULEBOOK_URL,
+      date: '6 November 2017',
     },
     UIUX: {
       code: 'uiux',
       title: 'UI/UX',
       logo: logoUIUX,
       rulebookURL: UIUX_RULEBOOK_URL,
+      date: '',
     },
   };
 
@@ -144,6 +148,9 @@ export default class Competitions extends Component {
                 <img src={competition[key].logo} alt={`logo ${competition[key].title}`} />
                 <span className="title">
                   {competition[key].title}
+                </span>
+                <span className="date">
+                  {competition[key].date}
                 </span>
               </div>
               <div className="bottom">
@@ -296,6 +303,11 @@ const Container = styled(({ column, ...props }) => <div {...props} />)`
       font-family: ${props => props.theme.font.jaapokki};
       align-self: center;
       font-size: ${props => props.theme.size.font.medium};
+    }
+    .date {
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: ${props => props.theme.color.gray};
     }
     .top {
       display: flex;

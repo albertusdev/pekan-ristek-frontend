@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { media } from '../../common/theme';
-import LoadingIndicator from '../../components/LoadingIndicator';
-import LoadingButtonComponent from '../../components/LoadingButtonComponent';
 import { DASHBOARD_EDIT_PASSWORD_PATH, DASHBOARD_EDIT_PROFILE_PATH } from '../../common/routing';
 
 @connect(state => ({ auth: state.auth }))
@@ -18,27 +16,24 @@ export default class UserProfile extends Component {
   };
 
   render() {
-    const { user, loading } = this.props.auth;
+    const { user } = this.props.auth;
     return (
       <Container>
-        {loading && <LoadingIndicator />}
-        <div className="name">
-          {`${user && user.first_name} ${user && user.last_name}`}
-        </div>
+        <div className="name">{`${user && user.first_name} ${user && user.last_name}`}</div>
         <div className="institution">
           {user && user.is_internal && `${user.id} - ${user.institution}`}
           {user && !user.is_internal && `${user.institution}`}
         </div>
-        <div className="email">
-          {user && user.email}
-        </div>
+        <div className="email">{user && user.email}</div>
         <ButtonsContainer>
           <Button onClick={() => this.props.history.push(DASHBOARD_EDIT_PROFILE_PATH)}>
             Edit Profile
           </Button>
-          <Button onClick={() => this.props.history.push(DASHBOARD_EDIT_PASSWORD_PATH)}>
-            Edit Password
-          </Button>
+          {user &&
+            !user.is_internal && (
+              <Button onClick={() => this.props.history.push(DASHBOARD_EDIT_PASSWORD_PATH)}>
+                Edit Password
+              </Button>)}
         </ButtonsContainer>
       </Container>
     );

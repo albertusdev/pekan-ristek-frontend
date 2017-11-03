@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import logoTraveloka from '../assets/logo-traveloka.png';
 import logoDewaweb from '../assets/logo-dewa-web.png';
+import logoStoqo from '../assets/logo-stoqo.png';
 import { media } from '../common/theme';
 
 const Container = styled.div`
@@ -22,10 +23,17 @@ const Container = styled.div`
     .logo-Traveloka {
       margin: 1rem 0;
       height: ${props => props.theme.height.logo.large};
+      object-fit: scale-down;
     }
     .logo-Dewaweb {
       margin: 1rem 0;
       height: ${props => props.theme.height.logo.large};
+      object-fit: scale-down;
+    }
+    .logo-Stoqo {
+      margin: 1rem;
+      height: ${props => props.theme.height.logo.medium};
+      object-fit: scale-down;
     }
   }
   ${media('mobile')} {
@@ -45,6 +53,9 @@ const Footer = props =>
       </a>
       <a href="https://www.dewaweb.com">
         <img src={logoDewaweb} className="logo-Dewaweb" alt="logo Dewaweb" />
+      </a>
+      <a href="https://www.stoqo.com">
+        <img src={logoStoqo} className="logo-Stoqo" alt="logo Stoqo" />
       </a>
     </div>
   </Container>;
