@@ -14,10 +14,10 @@ import logoSeminar from '../../assets/logo-seminar.svg';
 import logoShowcase from '../../assets/logo-showcase.svg';
 // IMPORT PHOTO
 // Showcase
-import photoSC01 from '../../assets/photos/P1-min.jpg';
-import photoSC02 from '../../assets/photos/P7-min.jpg';
+import photoSC01 from '../../assets/photos/P7-min.jpg';
+import photoSC02 from '../../assets/photos/P6-min.jpg';
 import photoSC03 from '../../assets/photos/P8-min.jpg';
-import photoSC04 from '../../assets/photos/P6-min.jpg';
+import photoSC04 from '../../assets/photos/P16-min.jpg';
 // Playground
 import photoPG01 from '../../assets/photos/P17-min.jpg';
 import photoPG02 from '../../assets/photos/P18-min.jpg';
