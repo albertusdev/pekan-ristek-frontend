@@ -15,20 +15,19 @@ import logoShowcase from '../../assets/logo-showcase.svg';
 // IMPORT PHOTO
 // Showcase
 import photoSC01 from '../../assets/photos/P1-min.jpg';
-import photoSC02 from '../../assets/photos/P16-min.jpg';
+import photoSC02 from '../../assets/photos/P7-min.jpg';
 import photoSC03 from '../../assets/photos/P8-min.jpg';
 import photoSC04 from '../../assets/photos/P6-min.jpg';
+// Playground
+import photoPG01 from '../../assets/photos/P17-min.jpg';
+import photoPG02 from '../../assets/photos/P18-min.jpg';
+import photoPG03 from '../../assets/photos/P3-min.jpg';
+import photoPG04 from '../../assets/photos/P2-min.jpg';
 // seminar
-import photoSeminar01 from '../../assets/photos/P17-min.jpg';
-import photoSeminar02 from '../../assets/photos/P7-min.jpg';
-import photoSeminar03 from '../../assets/photos/P3-min.jpg';
-import photoSeminar04 from '../../assets/photos/P2-min.jpg';
-// playground
-import photoPG01 from '../../assets/photos/P9-min.jpg';
-import photoPG02 from '../../assets/photos/P5-min.jpg';
-
-const photoPG03 = null;
-const photoPG04 = null;
+import photoSeminar01 from '../../assets/photos/P9-min.jpg';
+import photoSeminar02 from '../../assets/photos/P5-min.jpg';
+import photoSeminar03 from '../../assets/photos/P14-min.jpg';
+import photoSeminar04 from '../../assets/photos/P13-min.jpg';
 
 class Home extends Component {
   static propTypes = {
