@@ -12,35 +12,23 @@ import logoCITD from '../../assets/logo-citd.svg';
 import logoPlayground from '../../assets/logo-playground.svg';
 import logoSeminar from '../../assets/logo-seminar.svg';
 import logoShowcase from '../../assets/logo-showcase.svg';
-// // IMPORT PHOTO
-// // Showcase
-// import photoSC01 from '../../assets/photos/P1.JPG';
-// import photoSC02 from '../../assets/photos/P16.JPG';
-// import photoSC03 from '../../assets/photos/P8.JPG';
-// import photoSC04 from '../../assets/photos/P6.JPG';
-// // seminar
-// import photoSeminar01 from '../../assets/photos/P17.JPG';
-// import photoSeminar02 from '../../assets/photos/P7.JPG';
-// import photoSeminar03 from '../../assets/photos/P3.JPG';
-// import photoSeminar04 from '../../assets/photos/P2.JPG';
-// // playground
-// import photoPG01 from '../../assets/photos/P9.JPG';
-// import photoPG02 from '../../assets/photos/P5.JPG';
+// IMPORT PHOTO
+// Showcase
+import photoSC01 from '../../assets/photos/P1-min.jpg';
+import photoSC02 from '../../assets/photos/P16-min.jpg';
+import photoSC03 from '../../assets/photos/P8-min.jpg';
+import photoSC04 from '../../assets/photos/P6-min.jpg';
+// seminar
+import photoSeminar01 from '../../assets/photos/P17-min.jpg';
+import photoSeminar02 from '../../assets/photos/P7-min.jpg';
+import photoSeminar03 from '../../assets/photos/P3-min.jpg';
+import photoSeminar04 from '../../assets/photos/P2-min.jpg';
+// playground
+import photoPG01 from '../../assets/photos/P9-min.jpg';
+import photoPG02 from '../../assets/photos/P5-min.jpg';
 
-const photoPG01 = null;
-const photoPG02 = null;
 const photoPG03 = null;
 const photoPG04 = null;
-
-const photoSC01 = null;
-const photoSC02 = null;
-const photoSC03 = null;
-const photoSC04 = null;
-
-const photoSeminar01 = null;
-const photoSeminar02 = null;
-const photoSeminar03 = null;
-const photoSeminar04 = null;
 
 class Home extends Component {
   static propTypes = {
@@ -167,7 +155,6 @@ const Body = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    display: none;
   }
   .header-image {
     width: 100%;
