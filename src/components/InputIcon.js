@@ -12,7 +12,7 @@ const StyledFormGroup = styled(FormGroup)`
 
   .input-group-addon .glyphicon {
     font-size: 1.25rem;
-    color: ${props => props.theme.color.lightGray};
+    color: ${props => props.theme.color.black};
   }
   .input-group .form-control {
     z-index: 0;
@@ -20,7 +20,7 @@ const StyledFormGroup = styled(FormGroup)`
 `;
 
 const Label = styled(ControlLabel)`
-  color: ${props => props.theme.color.lightGray};
+  color: ${props => props.theme.color.black};
   letter-spacing: 1px;
   font-weight: 400;
   text-transform: uppercase;
