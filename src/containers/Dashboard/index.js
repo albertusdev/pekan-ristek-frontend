@@ -87,35 +87,34 @@ export default class Dashboard extends Component {
         </Container>
       );
     }
-    return (
-      <Container>
+    return <Container>
         <UserProfile history={this.props.history} />
-        {user &&
-          user.phone &&
-          user.email && (
-            <div className="playground-point-container">
+        {user && user.phone && user.email && <div className="playground-point-container">
               <div className="playground-point">
                 <span className="title">YOUR POINT:</span>
                 <span className="point">{user && user.curr_point}</span>
               </div>
+              <div className="playground-point">
+                <span className="title">YOUR PLAYGROUND TOKEN:</span>
+                <span className="point">{user && user.token}</span>
+              </div>
               <Line />
-            </div>
-          )}
+            </div>}
         <Nav>
           {user &&
             user.is_internal && (
               <NavItem
-                onClick={() => this.setActive(COMPETITIONS)}
                 exact
+                onClick={() => this.setActive(COMPETITIONS)}
                 to={createDashboardPath(COMPETITIONS)}
               >
                 Competitions
               </NavItem>
             )}
           <NavItem
-            onClick={() => this.setActive(SEMINARS)}
             exact
             to={createDashboardPath(SEMINARS)}
+            onClick={() => this.setActive(SEMINARS)}
           >
             Seminars
           </NavItem>
@@ -126,8 +125,7 @@ export default class Dashboard extends Component {
           user.email &&
           isCompetitionsActive && <Competitions />}
         {user && user.phone && user.email && isSeminarsActive && <Seminars />}
-      </Container>
-    );
+      </Container>;
   }
 }
 

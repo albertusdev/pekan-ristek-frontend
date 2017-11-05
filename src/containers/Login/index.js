@@ -56,6 +56,7 @@ class Login extends Component {
       const allowedOrigin = 'http://ristek.cs.ui.ac.id';
       const allowedLocalOrigin = 'http://localhost:8000';
       if (e.origin === allowedOrigin || e.origin === allowedLocalOrigin) {
+        console.log(e.data);
         this.props.setAuth(e.data);
         this.props.history.push(DASHBOARD_PATH);
       }
