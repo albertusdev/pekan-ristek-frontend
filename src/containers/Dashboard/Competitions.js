@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
+import { Alert, Button, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
 import { createTeam, loadTeam, joinTeam } from '../../redux_modules/competition';
 import { media } from '../../common/theme';
 import Card from '../../components/Card';
@@ -138,7 +138,7 @@ export default class Competitions extends Component {
   render() {
     const competition = Competitions.COMPETITIONS;
     const { hasFocus, isCreateTeamButtonClicked, isJoinTeamButtonClicked } = this.state;
-    const { hasRegistered, loading } = this.props.competition;
+    const { hasRegistered, loading, verified } = this.props.competition;
     return (
       <Container>
         {!hasFocus &&
@@ -186,6 +186,16 @@ export default class Competitions extends Component {
                 <div className="competition-name">
                   {this.state.active.code}
                 </div>
+                {verified && (
+                  <Alert bsStyle="success">
+                    Your team has been verified. Good luck!
+                  </Alert>
+                )}
+                {!verified && (
+                  <Alert bsStyle="danger">
+                    Your team hasn't been verified yet. Please wait or check the rulebook once more.
+                  </Alert> 
+                )}
                 <div className="team-details">
                   <div className="form-label">Team token:</div>
                   <Form>

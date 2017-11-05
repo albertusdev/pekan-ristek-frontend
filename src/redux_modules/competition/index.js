@@ -10,6 +10,7 @@ const initialState = {
   name: '',
   token: '',
   members: [],
+  verified: false,
   error: '',
   loaded: false,
   loading: false,
@@ -25,6 +26,7 @@ export default function reducer(state = initialState, action) {
         members: action.payload.members || [],
         name: action.payload.name || '',
         token: action.payload.team_token || '',
+        verified: action.payload.verified,
       };
     case ERROR_SET:
       return { ...state, error: action.payload, dry: false };
