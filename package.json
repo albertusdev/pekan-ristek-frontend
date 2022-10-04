@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "devDependencies": {
     "ava": "^0.19.1",
-    "enzyme": "^2.0.0-rc1",
+    "enzyme": "^2.9.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-import-resolver-alias": "^1.0.3",
