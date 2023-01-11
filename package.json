@@ -2,7 +2,7 @@
   "name": "react-starter",
   "version": "0.2.0",
   "devDependencies": {
-    "ava": "^0.19.1",
+    "ava": "^5.1.0",
     "enzyme": "^2.0.0-rc1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
